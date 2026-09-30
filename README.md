@@ -45,7 +45,7 @@ TODO
 modelling-of-complex-systems/
 ├── README.md          # Project overview and instructions
 ├── LICENSE            # Project license
-├── models/            # Model files and related code
+├── model/             # Model files and related code
 ├── presentation/      # Presentation files
 ├── documentation/     # Main project documentation
 └── report/            # Source files for the final report
