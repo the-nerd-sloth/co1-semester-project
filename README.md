@@ -21,14 +21,14 @@ This is the semester project for the course of *CO1: Modelling of Complex System
 		- [Installation](#installation)
 	- [Usage](#usage)
 	- [Roadmap](#roadmap)
-		- [Authors](#authors)
+	- [Authors](#authors)
 	- [License](#license)
 
 ## About
 
 This repository contains the semester project for the ZHAW course of CO1: Modelling of Complex Systems.
 
-It tackles the problem of safe drinking water distribution in rural Nepal; how to allocate a limited communal supply once the infrastructure is in place. 
+TODO 
 
 [Back to top](#readme-top)
 
@@ -42,23 +42,20 @@ TODO
 
 
 ```text
-Modelling of Complex Systems/
-	README.md
-	LICENSE
-	Code/
-		python scripts
-	Presentation/
-		presetation files
-	Problem/
-		problem definition related PDFs
-	Report/
-		Latex files, final PDFs and images
+modelling-of-complex-systems/
+├── README.md          # Project overview and instructions
+├── LICENSE            # Project license
+├── models/            # Model files and related code
+├── presentation/      # Presentation files
+├── documentation/     # Main project documentation
+└── report/            # Source files for the final report
 ```
 
 [Back to top](#readme-top)
 
 ## Getting Started
 TODO
+
 ### Prerequisites
 
 - Git
@@ -77,19 +74,18 @@ cd co1-semester-project/Code
 ## Usage
 TODO
 - Follow the Installation instructions.
-- Open the `project_script_lagrange.ipynb` in Jupyter.
-- Run it.
+- Something something...
 
 [Back to top](#readme-top)
 
-### Authors
+## Authors
 
-- **Triantafyllia Giora**
-	- GitHub: [@triantafylliagiora](https://github.com/triantafylliagiora)
+- **Anika Heim**
+	- GitHub: [@anika-dot](https://github.com/anika-dot)
 - **Spyridon Margomenos**
 	- Github: [@the-nerd-sloth](https://github.com/the-nerd-sloth)
-- **Robin Giacomelli**
-	- Github: [@xgunnarx](https://github.com/xgunnarx)
+- **Rebecca**
+	- Github: [@rebsie](https://github.com/rebsie)
 
 [Back to top](#readme-top)
 
