@@ -1,0 +1,99 @@
+Sun= 200+50*SIN(2*3.14159*Time/12)
+	~	Dmnl
+	~	Exogenous driver. Seasonal cycle stands in for Sun's varying intensity.
+	|
+
+Water Temperature= 10+0.05*Sun
+	~	Celsius
+	~	Driven by Sun, as in the diagram (Sun -> Water Temperature).
+	|
+
+Evaporation= 0.01*Water Temperature
+	~	m/Month
+	~	Driven by Water Temperature. No downstream link, matching the diagram (Water Temperature -> Evaporation, a dead end).
+	|
+
+External Migratory Animals= 2
+	~	Ton/Month
+	~	Exogenous input. Diagram label: 'Animals - external/migratory' (-> Plants).
+	|
+
+Agriculture with Fertilizer= 5
+	~	Ton/Month
+	~	Exogenous input (-> Nutrient Levels).
+	|
+
+Pollution Microplastic= 0.3
+	~	Dmnl
+	~	Exogenous input, 0 (none) to 1 (severe). Diagram label: 'Pollution / Microplastic' (-> Food).
+	|
+
+Food= 0.1*(1-Pollution Microplastic)
+	~	1/Month
+	~	Diagram label: 'Food (over-/under-fishing)'. Higher pollution is assumed to suppress fishing activity, lowering Food.
+	|
+
+O2 Levels= INTEG (
+	0.05*Plants-0.01*(Water Temperature-20)-0.08*O2 Levels,
+		8)
+	~	Ton
+	~	O2 Levels. Produced by Plants, reduced by warmer Water Temperature, with a natural return toward equilibrium.
+	|
+
+Plants= INTEG (
+	0.05*Nutrient Levels+External Migratory Animals+0.01*O2 Levels-0.02*Fish Stock-0.05*Plants,
+		50)
+	~	Ton
+	~	Plants. Fed by Nutrient Levels, O2 Levels and External Migratory Animals; grazed by Fish Stock; a self-decay term closes the loop back to Nutrient Levels.
+	|
+
+Nutrient Levels= INTEG (
+	Agriculture with Fertilizer+0.02*Plants+0.01*Fish Stock-0.08*Nutrient Levels,
+		20)
+	~	Ton
+	~	Nutrient Levels. Fed by Agriculture, by Plants decaying, and by Fish Stock waste; consumed as it supports Plants.
+	|
+
+Fish Stock= INTEG (
+	0.02*Plants+0.01*O2 Levels-Food*Fish Stock-0.02*Fish Stock,
+		40)
+	~	Ton
+	~	Fish Stock -- the headline output. Supported by Plants and O2 Levels; removed by Food (fishing pressure) and natural mortality.
+	|
+
+FINAL TIME  = 240
+	~	Month
+	~	The final time for the simulation (20 years).
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Arial|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Sun,120,80,60,26,8,3,0,0,0,0,0,0
+10,2,Water Temperature,340,80,119,26,8,3,0,0,0,0,0,0
+10,3,Evaporation,580,80,77,26,8,3,0,0,0,0,0,0
+10,4,External Migratory Animals,120,180,182,26,8,3,0,0,0,0,0,0
+10,5,Agriculture with Fertilizer,380,180,189,26,8,3,0,0,0,0,0,0
+10,6,Pollution Microplastic,640,180,154,26,8,3,0,0,0,0,0,0
+10,7,Food,640,280,60,26,8,3,0,0,0,0,0,0
+10,8,O2 Levels,150,380,63,26,3,3,0,0,0,0,0,0
+10,9,Plants,370,380,60,26,3,3,0,0,0,0,0,0
+10,10,Nutrient Levels,590,380,105,26,3,3,0,0,0,0,0,0
+10,11,Fish Stock,370,480,70,26,3,3,0,0,0,0,0,0
