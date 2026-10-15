@@ -1,99 +1,186 @@
-Sun= 200+50*SIN(2*3.14159*Time/12)
+{UTF-8}
+Sun= 200
 	~	Dmnl
-	~	Exogenous driver. Seasonal cycle stands in for Sun's varying intensity.
+	~	No solar/irradiance dataset was in your file, so this stays a constant \
+		placeholder for the diagram node. Water Temperature below is now \
+		calibrated directly from the real IGKB measurements instead of being \
+		derived from Sun.
 	|
 
-Water Temperature= 10+0.05*Sun
+Water Temperature= 8.5+0.057*(Time-1945)
 	~	Celsius
-	~	Driven by Sun, as in the diagram (Sun -> Water Temperature).
+	~	Linear fit to the real IGKB chart: about 8.5C in 1945 rising to about \
+		12.5C by 2015 (the chart's data runs 1945-2015). This matches your note \
+		that 1990-2017 averaged 1.2C warmer than the prior three decades.
 	|
 
 Evaporation= 0.01*Water Temperature
-	~	m/Month
-	~	Driven by Water Temperature. No downstream link, matching the diagram (Water Temperature -> Evaporation, a dead end).
+	~	m/Year
+	~	Unchanged mechanism; still a dead end per the diagram.
 	|
 
-External Migratory Animals= 2
-	~	Ton/Month
-	~	Exogenous input. Diagram label: 'Animals - external/migratory' (-> Plants).
+External Migratory Animals=2
+	~	Ton/Year
+	~	No data was provided for this node.
 	|
 
-Agriculture with Fertilizer= 5
-	~	Ton/Month
-	~	Exogenous input (-> Nutrient Levels).
+Agriculture with Fertilizer=5+80*EXP(-((Time-1977)/15)*((Time-1977)/15))
+	~	Ton/Year
+	~	Reshaped into a rise-then-fall curve fit to the real total-phosphorus \
+		chart: low before 1960, peaking around 1975-1980, and then declining.
 	|
 
-Pollution Microplastic= 0.3
+Pollution Microplastic=MAX(0,MIN(1,0.008*(Time-1975)+0.1))
 	~	Dmnl
-	~	Exogenous input, 0 (none) to 1 (severe). Diagram label: 'Pollution / Microplastic' (-> Food).
+	~	CHANGE INTO GENERAL POLLUTION? No microplastic dataset. Used the real \
+		chloride trend instead (rising steadily from about 4 to 7.5 mg/L, \
+		1975-2020, attributed to road salt) as the best available proxy for \
+		general pollution pressure, rescaled onto the model's existing 0-1 \
+		severity scale.
 	|
 
-Food= 0.1*(1-Pollution Microplastic)
-	~	1/Month
-	~	Diagram label: 'Food (over-/under-fishing)'. Higher pollution is assumed to suppress fishing activity, lowering Food.
+Food= (0.02+0.08*EXP(-((Time-1978)/20)*((Time-1978)/20)))*MAX(0,1-Pollution Microplastic\
+		*0.5)*IF THEN ELSE(Time>=2024,0,1)
+	~	1/Year
+	~	Reshaped to track the real catch data: fishing pressure rising through the \
+		productive decades (catches peaked around 1970-1990), declining after, \
+		still reduced somewhat by Pollution Microplastic as before, and forced to \
+		exactly 0 from 2024 onward because whitefish fishing in Lake Constance has \
+		been banned since 2024 (per IGKB).
 	|
 
-O2 Levels= INTEG (
-	0.05*Plants-0.01*(Water Temperature-20)-0.08*O2 Levels,
-		8)
+O2 Levels= INTEG ((8-0.3*(Water Temperature-9)-0.04*Nutrient Levels-O2 Levels)*0.3,
+		6.8)
+	~	mg/L
+	~	Units switched to mg/L to match the real oxygen chart and the 6 mg/L \
+		threshold the source calls critical for whitefish eggs and deep-water \
+		life. Relaxes toward a target set by Water Temperature (capturing both \
+		lower O2 solubility and the weaker winter circulation your source \
+		describes: 'water circulation is decreasing because of milder winters and \
+		higher water temperatures') and by Nutrient Levels (the same \
+		eutrophication-to-hypoxia link the O2 and phosphorus charts show together).
+	|
+
+Plants= INTEG ((2*Nutrient Levels+5*External Migratory Animals-Plants)*0.5,
+		20)
 	~	Ton
-	~	O2 Levels. Produced by Plants, reduced by warmer Water Temperature, with a natural return toward equilibrium.
-	|
-
-Plants= INTEG (
-	0.05*Nutrient Levels+External Migratory Animals+0.01*O2 Levels-0.02*Fish Stock-0.05*Plants,
-		50)
-	~	Ton
-	~	Plants. Fed by Nutrient Levels, O2 Levels and External Migratory Animals; grazed by Fish Stock; a self-decay term closes the loop back to Nutrient Levels.
+	~	Unchanged mechanism (relaxes toward a level set by Nutrient Levels and \
+		External Migratory Animals); no plant-biomass data available, so this \
+		remains an abstracted proxy stock.
 	|
 
 Nutrient Levels= INTEG (
-	Agriculture with Fertilizer+0.02*Plants+0.01*Fish Stock-0.08*Nutrient Levels,
-		20)
+	(Agriculture with Fertilizer+0.05*Plants+0.02*Fish Stock-Nutrient Levels)*0.4,
+		6)
 	~	Ton
-	~	Nutrient Levels. Fed by Agriculture, by Plants decaying, and by Fish Stock waste; consumed as it supports Plants.
+	~	Relaxes toward Agriculture with Fertilizer (now the real P curve) plus \
+		small Plant/Fish contributions, with a response time of about 2.5 years so \
+		it tracks the real phosphorus curve's rise and fall rather than drifting \
+		away from it.
 	|
 
-Fish Stock= INTEG (
-	0.02*Plants+0.01*O2 Levels-Food*Fish Stock-0.02*Fish Stock,
-		40)
+Fish Stock= INTEG (0.35*Fish Stock*(1-Fish Stock/1500)*(Plants/(Plants+100))*(O2 Levels\
+		/(O2 Levels+3))-Food*Fish Stock-0.02*Fish Stock,
+		300)
 	~	Ton
-	~	Fish Stock -- the headline output. Supported by Plants and O2 Levels; removed by Food (fishing pressure) and natural mortality.
+	~	Initial value and scale set to the order of magnitude of the real \
+		professional catch data (roughly 200-1900 t/a, 1914-2025). Growth now \
+		depends on Plants (food) and O2 Levels (health) as before, with Food \
+		removing stock through harvest. Fish Stock here approximates standing \
+		population biomass, not annual catch, so it will not match the real chart \
+		point-for-point even where well calibrated.
 	|
 
-FINAL TIME  = 240
-	~	Month
-	~	The final time for the simulation (20 years).
+FINAL TIME  = 2030
+	~	Year
+	~	The final time for the simulation (extends a few years past the last real \
+		data point to show the post-2024 fishing-ban trajectory).
 	|
 
-INITIAL TIME  = 0
-	~	Month
-	~	The initial time for the simulation.
+INITIAL TIME  = 1945
+	~	Year
+	~	The initial time for the simulation, matching the start of the real \
+		water-temperature record.
 	|
 
 SAVEPER  = 
-        TIME STEP
-	~	Month [0,?]
-	~	The frequency with which output is stored.
+        1
+	~	Year [0,?]
+	~	The frequency with which output is stored (annual, matching the real \
+		data's resolution).
 	|
 
-TIME STEP  = 1
-	~	Month [0,?]
-	~	The time step for the simulation.
+TIME STEP  = 0.1
+	~	Year [0,?]
+	~	The time step for the simulation (finer than SAVEPER for numerical \
+		accuracy).
 	|
 
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
 *View 1
 $192-192-192,0,Arial|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
-10,1,Sun,120,80,60,26,8,3,0,0,0,0,0,0
-10,2,Water Temperature,340,80,119,26,8,3,0,0,0,0,0,0
-10,3,Evaporation,580,80,77,26,8,3,0,0,0,0,0,0
-10,4,External Migratory Animals,120,180,182,26,8,3,0,0,0,0,0,0
-10,5,Agriculture with Fertilizer,380,180,189,26,8,3,0,0,0,0,0,0
-10,6,Pollution Microplastic,640,180,154,26,8,3,0,0,0,0,0,0
-10,7,Food,640,280,60,26,8,3,0,0,0,0,0,0
-10,8,O2 Levels,150,380,63,26,3,3,0,0,0,0,0,0
-10,9,Plants,370,380,60,26,3,3,0,0,0,0,0,0
-10,10,Nutrient Levels,590,380,105,26,3,3,0,0,0,0,0,0
-10,11,Fish Stock,370,480,70,26,3,3,0,0,0,0,0,0
+10,1,Sun,300,80,60,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,2,Water Temperature,520,80,119,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Evaporation,760,80,77,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,External Migratory Animals,300,180,182,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,5,Agriculture with Fertilizer,560,180,189,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,6,Pollution Microplastic,820,180,154,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,7,Food,820,280,60,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,8,O2 Levels,330,380,63,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,9,Plants,550,380,60,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,10,Nutrient Levels,770,380,105,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,11,Fish Stock,550,480,70,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,12,Time,520,124,29,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,13,12,2,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,14,2,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,15,Time,560,224,29,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,16,15,5,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,17,Time,820,224,29,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,18,17,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,19,6,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+10,20,Time,820,324,29,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,21,20,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,22,10,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,23,2,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,24,4,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,25,10,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,26,5,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,27,11,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,28,9,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,29,7,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,30,8,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+1,31,9,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+///---\\\
+:L<%^E!@
+1:current.vdfx
+4:Time
+5:Fish Stock
+9:current
+19:100,0
+24:1945
+25:2030
+26:2030
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
