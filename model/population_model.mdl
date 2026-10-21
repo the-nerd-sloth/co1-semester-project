@@ -1,186 +1,631 @@
 {UTF-8}
-Sun= 200
+Warming Rate Base = 0.04
+	~	degC/Year
+	~	Long-term surface warming. Data file: 1990-2017 mean was 1.2 degC above the 3 earlier decades, about 0.04 degC per year. Stands in for the Sun box of the sketch.
+	|
+
+Warming Scenario Factor = 1
 	~	Dmnl
-	~	No solar/irradiance dataset was in your file, so this stays a constant \
-		placeholder for the diagram node. Water Temperature below is now \
-		calibrated directly from the real IGKB measurements instead of being \
-		derived from Sun.
+	~	Scenario multiplier on warming. 0 = no further warming, 2 = twice as fast.
 	|
 
-Water Temperature= 8.5+0.057*(Time-1945)
-	~	Celsius
-	~	Linear fit to the real IGKB chart: about 8.5C in 1945 rising to about \
-		12.5C by 2015 (the chart's data runs 1945-2015). This matches your note \
-		that 1990-2017 averaged 1.2C warmer than the prior three decades.
+Warming Rate = Warming Rate Base * Warming Scenario Factor
+	~	degC/Year
+	~	Warming of the surface water.
 	|
 
-Evaporation= 0.01*Water Temperature
-	~	m/Year
-	~	Unchanged mechanism; still a dead end per the diagram.
+Initial Water Temperature = 10.8
+	~	degC
+	~	Assumed 1980 annual mean at 0.5 m. Only the change matters.
 	|
 
-External Migratory Animals=2
-	~	Ton/Year
-	~	No data was provided for this node.
+Water Temperature = INTEG(Warming Rate, Initial Water Temperature)
+	~	degC
+	~	Annual mean water temperature at 0.5 m depth.
 	|
 
-Agriculture with Fertilizer=5+80*EXP(-((Time-1977)/15)*((Time-1977)/15))
-	~	Ton/Year
-	~	Reshaped into a rise-then-fall curve fit to the real total-phosphorus \
-		chart: low before 1960, peaking around 1975-1980, and then declining.
+Reference Temperature = Initial Water Temperature
+	~	degC
+	~	Temperature at which all temperature effects equal 1.
 	|
 
-Pollution Microplastic=MAX(0,MIN(1,0.008*(Time-1975)+0.1))
+Temperature Anomaly = Water Temperature - Reference Temperature
+	~	degC
+	~	Warming relative to 1980.
+	|
+
+Depth Damping = 0.6
 	~	Dmnl
-	~	CHANGE INTO GENERAL POLLUTION? No microplastic dataset. Used the real \
-		chloride trend instead (rising steadily from about 4 to 7.5 mg/L, \
-		1975-2020, attributed to road salt) as the best available proxy for \
-		general pollution pressure, rescaled onto the model's existing 0-1 \
-		severity scale.
+	~	Deep water warms more slowly than the 0.5 m series. Assumption.
 	|
 
-Food= (0.02+0.08*EXP(-((Time-1978)/20)*((Time-1978)/20)))*MAX(0,1-Pollution Microplastic\
-		*0.5)*IF THEN ELSE(Time>=2024,0,1)
+Spawning Depth Anomaly = Temperature Anomaly * Depth Damping
+	~	degC
+	~	Estimated warming at spawning depth.
+	|
+
+Circulation Table([(0,0)-(6,1)],
+	(0,1),(0.5,0.85),(1,0.65),(1.5,0.45),(2,0.32),(3,0.27),(6,0.25))
+	~	Dmnl
+	~	Share of full winter mixing versus warming.
+	|
+
+Circulation Index = Circulation Table(Temperature Anomaly)
+	~	Dmnl
+	~	1 = full overturn, about 0.3 = poor circulation.
+	|
+
+Lake Volume = 47.6
+	~	km3
+	~	Volume of the Obersee. 1 km3 times 1 ug/L = 1 t of P.
+	|
+
+Agriculture P Load = 60
+	~	t/Year
+	~	Diffuse agricultural and natural P input. Assumed split of the 100-110 t/yr total.
+	|
+
+Agriculture Factor = 1
+	~	Dmnl
+	~	Scenario lever. 0.5 = halve agricultural P input.
+	|
+
+Wastewater Table([(1980,0)-(2060,1400)],
+	(1980,1206),(1985,859),(1990,440),(1995,211),(2000,118),(2005,52),(2010,46),(2015,52),(2020,51),(2025,49),(2030,48),(2060,48))
+	~	t/Year
+	~	Point source and legacy P input reconstructed to follow the approximate observed P decline. Replace with your own data.
+	|
+
+Wastewater P Load = Wastewater Table(Time)
+	~	t/Year
+	~	P entering via wastewater.
+	|
+
+P Loss Rate = 0.35
 	~	1/Year
-	~	Reshaped to track the real catch data: fishing pressure rising through the \
-		productive decades (catches peaked around 1970-1990), declining after, \
-		still reduced somewhat by Pollution Microplastic as before, and forced to \
-		exactly 0 from 2024 onward because whitefish fishing in Lake Constance has \
-		been banned since 2024 (per IGKB).
+	~	Outflow via the Rhine plus sedimentation.
 	|
 
-O2 Levels= INTEG ((8-0.3*(Water Temperature-9)-0.04*Nutrient Levels-O2 Levels)*0.3,
-		6.8)
+Release Table([(0,0)-(14,1)],
+	(0,1),(0.5,0.6),(1,0.2),(1.5,0),(14,0))
+	~	Dmnl
+	~	Sediment P is released only when bottom O2 is close to zero.
+	|
+
+Sediment Release Capacity = 30
+	~	t/Year
+	~	Maximum internal P load when the deep water is anoxic. Assumption.
+	|
+
+Sediment P Release = Sediment Release Capacity * Release Table(Deep Water O2)
+	~	t/Year
+	~	Internal P loading from the sediment.
+	|
+
+P Loading = Agriculture P Load * Agriculture Factor + Wastewater P Load
+	~	t/Year
+	~	External P input.
+	|
+
+P Loss = P Loss Rate * Phosphorus
+	~	t/Year
+	~	Outflow and sedimentation of P.
+	|
+
+Starting Phosphorus = 80 * Lake Volume
+	~	t
+	~	Total P in 1980, about 80 ug/L.
+	|
+
+Phosphorus = INTEG(P Loading + Sediment P Release - P Loss, Starting Phosphorus)
+	~	t
+	~	Total phosphorus in the Obersee.
+	|
+
+P Concentration = Phosphorus / Lake Volume
+	~	ug/L
+	~	Volume weighted annual mean total P.
+	|
+
+Algae Capacity = 14
+	~	ugChl/L
+	~	Saturating phytoplankton biomass as chlorophyll a.
+	|
+
+P Half Saturation = 22
+	~	ug/L
+	~	P concentration at half of Algae Capacity. Assumption.
+	|
+
+Algae = Algae Capacity * P Concentration / (P Concentration + P Half Saturation)
+	~	ugChl/L
+	~	Phytoplankton biomass. P is the limiting nutrient.
+	|
+
+O2 Saturation = 11
 	~	mg/L
-	~	Units switched to mg/L to match the real oxygen chart and the 6 mg/L \
-		threshold the source calls critical for whitefish eggs and deep-water \
-		life. Relaxes toward a target set by Water Temperature (capturing both \
-		lower O2 solubility and the weaker winter circulation your source \
-		describes: 'water circulation is decreasing because of milder winters and \
-		higher water temperatures') and by Nutrient Levels (the same \
-		eutrophication-to-hypoxia link the O2 and phosphorus charts show together).
+	~	Deep water O2 after full overturn. Assumption.
 	|
 
-Plants= INTEG ((2*Nutrient Levels+5*External Migratory Animals-Plants)*0.5,
-		20)
-	~	Ton
-	~	Unchanged mechanism (relaxes toward a level set by Nutrient Levels and \
-		External Migratory Animals); no plant-biomass data available, so this \
-		remains an abstracted proxy stock.
-	|
-
-Nutrient Levels= INTEG (
-	(Agriculture with Fertilizer+0.05*Plants+0.02*Fish Stock-Nutrient Levels)*0.4,
-		6)
-	~	Ton
-	~	Relaxes toward Agriculture with Fertilizer (now the real P curve) plus \
-		small Plant/Fish contributions, with a response time of about 2.5 years so \
-		it tracks the real phosphorus curve's rise and fall rather than drifting \
-		away from it.
-	|
-
-Fish Stock= INTEG (0.35*Fish Stock*(1-Fish Stock/1500)*(Plants/(Plants+100))*(O2 Levels\
-		/(O2 Levels+3))-Food*Fish Stock-0.02*Fish Stock,
-		300)
-	~	Ton
-	~	Initial value and scale set to the order of magnitude of the real \
-		professional catch data (roughly 200-1900 t/a, 1914-2025). Growth now \
-		depends on Plants (food) and O2 Levels (health) as before, with Food \
-		removing stock through harvest. Fish Stock here approximates standing \
-		population biomass, not annual catch, so it will not match the real chart \
-		point-for-point even where well calibrated.
-	|
-
-FINAL TIME  = 2030
+Renewal Time = 4
 	~	Year
-	~	The final time for the simulation (extends a few years past the last real \
-		data point to show the post-2024 fishing-ban trajectory).
+	~	Time scale of O2 renewal at full circulation.
 	|
 
-INITIAL TIME  = 1945
+O2 Use Coefficient = 0.19
+	~	mg/L/Year
+	~	O2 consumed per unit of algae. Calibrated to about 6 mg/L at 5 to 7 ug/L P with poor circulation.
+	|
+
+O2 Half Saturation = 0.5
+	~	mg/L
+	~	O2 consumption fades as O2 approaches zero.
+	|
+
+O2 Renewal = Circulation Index * (O2 Saturation - Deep Water O2) / Renewal Time
+	~	mg/L/Year
+	~	Oxygen supply by winter mixing.
+	|
+
+O2 Consumption = O2 Use Coefficient * Algae * Deep Water O2 / (Deep Water O2 + O2 Half Saturation)
+	~	mg/L/Year
+	~	Oxygen use by breakdown of dead algae.
+	|
+
+Starting Deep Water O2 = 3
+	~	mg/L
+	~	Assumed 1980 value.
+	|
+
+Deep Water O2 = INTEG(O2 Renewal - O2 Consumption, Starting Deep Water O2)
+	~	mg/L
+	~	Minimum O2 near the lake bottom.
+	|
+
+Zoop Growth Rate = 6
+	~	1/Year
+	~	Maximum growth rate of zooplankton biomass.
+	|
+
+Zoop Algae Half Saturation = 2
+	~	ugChl/L
+	~	Algae level at half maximal zooplankton growth.
+	|
+
+Zoop Mortality Rate = 2
+	~	1/Year
+	~	Background loss of zooplankton.
+	|
+
+Crowding Coefficient = 0.00029
+	~	1/t/Year
+	~	Density dependent loss that keeps zooplankton bounded.
+	|
+
+Adult Consumption = 0.6
+	~	kg/Year
+	~	Zooplankton eaten per adult whitefish at full feeding. Assumption.
+	|
+
+Juvenile Consumption = 0.4
+	~	kg/Year
+	~	Zooplankton eaten per juvenile whitefish at full feeding. Assumption.
+	|
+
+Zoop Half Saturation = 2000
+	~	t
+	~	Zooplankton biomass at which fish feed at half rate.
+	|
+
+Feeding Ratio = Zooplankton / (Zooplankton + Zoop Half Saturation)
+	~	Dmnl
+	~	Fraction of maximum feeding achieved by fish.
+	|
+
+Zoop Production = Zoop Growth Rate * Zooplankton * Algae / (Algae + Zoop Algae Half Saturation)
+	~	t/Year
+	~	Algae to zooplankton.
+	|
+
+Zoop Natural Loss = Zoop Mortality Rate * Zooplankton
+	~	t/Year
+	~	Background loss.
+	|
+
+Zoop Crowding Loss = Crowding Coefficient * Zooplankton * Zooplankton
+	~	t/Year
+	~	Density dependent loss.
+	|
+
+Fish Grazing = (Adult Whitefish * Adult Consumption + Juvenile Whitefish * Juvenile Consumption) * 1000 * Feeding Ratio
+	~	t/Year
+	~	Whitefish eat zooplankton. Million fish times kg is 1000 t.
+	|
+
+Stickleback Grazing Rate = 0.5
+	~	1/Year
+	~	Zooplankton removed by stickleback per unit of stickleback index.
+	|
+
+Stickleback Grazing = Stickleback Grazing Rate * Stickleback Index * Zooplankton
+	~	t/Year
+	~	Competition for food by the stickleback.
+	|
+
+Zooplankton = INTEG(Zoop Production - Zoop Natural Loss - Zoop Crowding Loss - Fish Grazing - Stickleback Grazing, 3000)
+	~	t
+	~	Zooplankton biomass, model scaled.
+	|
+
+Stickleback Switch = 1
+	~	Dmnl
+	~	1 = include the stickleback invasion, 0 = without it.
+	|
+
+Stickleback Table([(1980,0)-(2100,1)],
+	(1980,0),(2011,0),(2012,0.1),(2015,1),(2100,1))
+	~	Dmnl
+	~	Pelagic stickleback invasion from 2012.
+	|
+
+Stickleback Index = Stickleback Switch * Stickleback Table(Time)
+	~	Dmnl
+	~	Relative stickleback pressure.
+	|
+
+Stickleback Egg Predation = 0.5
+	~	Dmnl
+	~	Share of egg survival lost at full stickleback pressure. Assumption.
+	|
+
+Stickleback Larval Effect = 0.3
+	~	Dmnl
+	~	Share of larval survival lost at full stickleback pressure. Assumption.
+	|
+
+Female Fraction = 0.5
+	~	Dmnl
+	~	Share of adults that are females.
+	|
+
+Mean Weight = 0.3
+	~	kg
+	~	Mean weight of an adult whitefish. Assumption.
+	|
+
+Eggs per kg = 19000
+	~	1/kg
+	~	16000 to 22000 eggs per kg of female.
+	|
+
+Eggs per Adult = Female Fraction * Mean Weight * Eggs per kg
+	~	eggs/fish
+	~	Potential fecundity.
+	|
+
+Reference Feeding Ratio = 0.5
+	~	Dmnl
+	~	Feeding ratio at which fecundity and larval survival are normal.
+	|
+
+Food Index = MIN(1.5, Feeding Ratio / Reference Feeding Ratio)
+	~	Dmnl
+	~	Food condition of the fish.
+	|
+
+Eggs Laid = Adult Whitefish * Eggs per Adult * Food Index
+	~	million eggs/Year
+	~	Adults to eggs, boosted by zooplankton.
+	|
+
+O2 Egg Table([(0,0)-(14,1)],
+	(0,0),(2,0.1),(4,0.5),(6,0.95),(8,1),(14,1))
+	~	Dmnl
+	~	Eggs overwinter on the lake bed and need more than 6 mg/L.
+	|
+
+Temperature Table([(0,0)-(6,1)],
+	(0,1),(1,0.85),(2,0.6),(3,0.35),(4,0.15),(6,0.02))
+	~	Dmnl
+	~	Warmer water raises egg and larval mortality. Shape is an assumption.
+	|
+
+Temperature Effect = Temperature Table(Spawning Depth Anomaly)
+	~	Dmnl
+	~	Multiplier on early life survival.
+	|
+
+O2 Effect on Eggs = O2 Egg Table(Deep Water O2)
+	~	Dmnl
+	~	Multiplier on egg survival.
+	|
+
+Base Egg Survival = 0.3
+	~	Dmnl
+	~	Egg to hatch survival at good conditions. Assumption.
+	|
+
+Egg Survival = Base Egg Survival * O2 Effect on Eggs * Temperature Effect * (1 - Stickleback Egg Predation * Stickleback Index)
+	~	Dmnl
+	~	Survival of eggs to hatching.
+	|
+
+Hatching = Eggs Laid * Egg Survival
+	~	million larvae/Year
+	~	Natural hatch.
+	|
+
+Stocking Baseline = 120
+	~	million larvae/Year
+	~	Hatchery stocking until the cutback. Assumption.
+	|
+
+Stocking Reduced = 20
+	~	million larvae/Year
+	~	Stocking after the cutback. Assumption.
+	|
+
+Stocking Cutback Year = 2018
 	~	Year
-	~	The initial time for the simulation, matching the start of the real \
-		water-temperature record.
+	~	Year from which stocking is reduced.
 	|
 
-SAVEPER  = 
-        1
-	~	Year [0,?]
-	~	The frequency with which output is stored (annual, matching the real \
-		data's resolution).
+Stocked Larvae = IF THEN ELSE(Time < Stocking Cutback Year, Stocking Baseline, Stocking Reduced)
+	~	million larvae/Year
+	~	Added fish roe of the sketch.
 	|
 
-TIME STEP  = 0.1
+Larval Survival Base = 0.0022
+	~	Dmnl
+	~	Larva to juvenile survival before density dependence. Calibrated.
+	|
+
+Potential Recruits = (Hatching + Stocked Larvae) * Larval Survival Base * Temperature Effect * (1 - Stickleback Larval Effect * Stickleback Index) * Food Index
+	~	million fish/Year
+	~	Recruits without crowding.
+	|
+
+Recruit Ceiling = 10
+	~	million fish/Year
+	~	Recruitment capacity at normal food. Calibrated.
+	|
+
+Recruitment Capacity = Recruit Ceiling * Feeding Ratio / Reference Feeding Ratio
+	~	million fish/Year
+	~	Capacity scales with zooplankton availability.
+	|
+
+Recruitment = Potential Recruits / (1 + Potential Recruits / Recruitment Capacity)
+	~	million fish/Year
+	~	Birth fish flow of the sketch.
+	|
+
+Maturation Time = 2
+	~	Year
+	~	Time as juvenile before entering the adult stock.
+	|
+
+Juvenile Mortality = 0.4
+	~	1/Year
+	~	Juvenile mortality. Assumption.
+	|
+
+Maturation = Juvenile Whitefish / Maturation Time
+	~	million fish/Year
+	~	Juveniles becoming adults.
+	|
+
+Juvenile Deaths = Juvenile Whitefish * Juvenile Mortality
+	~	million fish/Year
+	~	Juvenile mortality flow.
+	|
+
+Juvenile Whitefish = INTEG(Recruitment - Maturation - Juvenile Deaths, 4)
+	~	million fish
+	~	Age 0 to 2 whitefish.
+	|
+
+Adult Mortality = 0.25
+	~	1/Year
+	~	Natural death rate of adults.
+	|
+
+Natural Deaths = Adult Whitefish * Adult Mortality
+	~	million fish/Year
+	~	Death fish natural of the sketch.
+	|
+
+Fishing Fraction Normal = 0.3
+	~	1/Year
+	~	Share of adults caught per year before the ban. Assumption.
+	|
+
+Fishing Fraction Reopened = 0.15
+	~	1/Year
+	~	Share caught after reopening in 2027. Scenario lever.
+	|
+
+Ban Start = 2024
+	~	Year
+	~	Whitefish fishing ban starts.
+	|
+
+Ban End = 2027
+	~	Year
+	~	Ban ends May 2027, modelled as start of 2027.
+	|
+
+Fishing Fraction = IF THEN ELSE(Time < Ban Start, Fishing Fraction Normal, IF THEN ELSE(Time < Ban End, 0, Fishing Fraction Reopened))
+	~	1/Year
+	~	Fishing mortality of adults.
+	|
+
+Fish Caught = Adult Whitefish * Fishing Fraction
+	~	million fish/Year
+	~	Adults caught per year.
+	|
+
+Adult Whitefish = INTEG(Maturation - Natural Deaths - Fish Caught, 5)
+	~	million fish
+	~	Fish adults of the sketch.
+	|
+
+Catch Tonnes = Fish Caught * Mean Weight * 1000
+	~	t/Year
+	~	Compare with the catch series in your data file.
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2060
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 1980
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 0.25
 	~	Year [0,?]
-	~	The time step for the simulation (finer than SAVEPER for numerical \
-		accuracy).
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.0625
+	~	Year [0,?]
+	~	The time step for the simulation.
 	|
 
 \\\---/// Sketch information - do not modify anything except names
 V300  Do not put anything below this section - it will be ignored
-*View 1
-$192-192-192,0,Arial|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
-10,1,Sun,300,80,60,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,2,Water Temperature,520,80,119,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,3,Evaporation,760,80,77,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,4,External Migratory Animals,300,180,182,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,5,Agriculture with Fertilizer,560,180,189,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,6,Pollution Microplastic,820,180,154,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,7,Food,820,280,60,26,8,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,8,O2 Levels,330,380,63,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,9,Plants,550,380,60,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,10,Nutrient Levels,770,380,105,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,11,Fish Stock,550,480,70,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
-10,12,Time,520,124,29,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,13,12,2,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,14,2,3,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-10,15,Time,560,224,29,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,16,15,5,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-10,17,Time,820,224,29,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,18,17,6,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,19,6,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-10,20,Time,820,324,29,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
-1,21,20,7,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,22,10,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,23,2,8,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,24,4,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,25,10,9,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,26,5,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,27,11,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,28,9,10,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,29,7,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,30,8,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
-1,31,9,11,0,0,0,0,0,64,0,-1--1--1,,1|(0,0)|
+*Lake Constance Whitefish
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Warming Rate,90,90,40,20,8,3,0,0,0,0,0,0
+10,2,Water Temperature,230,90,60,26,3,3,0,0,0,0,0,0
+10,3,Temperature Anomaly,380,90,40,20,8,3,0,0,0,0,0,0
+10,4,Spawning Depth Anomaly,540,90,40,20,8,3,0,0,0,0,0,0
+10,5,Temperature Effect,700,90,40,20,8,3,0,0,0,0,0,0
+10,6,Circulation Index,380,200,40,20,8,3,0,0,0,0,0,0
+10,7,O2 Renewal,380,310,40,20,8,3,0,0,0,0,0,0
+10,8,Deep Water O2,540,310,60,26,3,3,0,0,0,0,0,0
+10,9,O2 Consumption,700,310,40,20,8,3,0,0,0,0,0,0
+10,10,O2 Effect on Eggs,700,200,40,20,8,3,0,0,0,0,0,0
+10,11,Wastewater P Load,90,520,40,20,8,3,0,0,0,0,0,0
+10,12,P Loading,240,470,40,20,8,3,0,0,0,0,0,0
+10,13,Phosphorus,400,520,60,26,3,3,0,0,0,0,0,0
+10,14,P Loss,560,570,40,20,8,3,0,0,0,0,0,0
+10,15,Sediment P Release,400,410,40,20,8,3,0,0,0,0,0,0
+10,16,P Concentration,560,470,40,20,8,3,0,0,0,0,0,0
+10,17,Algae,700,420,40,20,8,3,0,0,0,0,0,0
+10,18,Zoop Production,860,420,40,20,8,3,0,0,0,0,0,0
+10,19,Zooplankton,1010,420,60,26,3,3,0,0,0,0,0,0
+10,20,Zoop Natural Loss,1010,510,40,20,8,3,0,0,0,0,0,0
+10,21,Zoop Crowding Loss,1130,510,40,20,8,3,0,0,0,0,0,0
+10,22,Fish Grazing,1130,360,40,20,8,3,0,0,0,0,0,0
+10,23,Stickleback Grazing,1180,440,40,20,8,3,0,0,0,0,0,0
+10,24,Feeding Ratio,1010,300,40,20,8,3,0,0,0,0,0,0
+10,25,Stickleback Index,1330,200,40,20,8,3,0,0,0,0,0,0
+10,26,Food Index,1010,200,40,20,8,3,0,0,0,0,0,0
+10,27,Eggs Laid,860,200,40,20,8,3,0,0,0,0,0,0
+10,28,Egg Survival,860,110,40,20,8,3,0,0,0,0,0,0
+10,29,Hatching,1010,110,40,20,8,3,0,0,0,0,0,0
+10,30,Stocked Larvae,1160,60,40,20,8,3,0,0,0,0,0,0
+10,31,Potential Recruits,1160,150,40,20,8,3,0,0,0,0,0,0
+10,32,Recruitment Capacity,1330,300,40,20,8,3,0,0,0,0,0,0
+10,33,Recruitment,1330,110,40,20,8,3,0,0,0,0,0,0
+10,34,Juvenile Whitefish,1480,110,60,26,3,3,0,0,0,0,0,0
+10,35,Maturation,1480,230,40,20,8,3,0,0,0,0,0,0
+10,36,Juvenile Deaths,1630,110,40,20,8,3,0,0,0,0,0,0
+10,37,Adult Whitefish,1480,350,60,26,3,3,0,0,0,0,0,0
+10,38,Natural Deaths,1630,350,40,20,8,3,0,0,0,0,0,0
+10,39,Fishing Fraction,1630,500,40,20,8,3,0,0,0,0,0,0
+10,40,Fish Caught,1480,500,40,20,8,3,0,0,0,0,0,0
+10,41,Catch Tonnes,1480,610,40,20,8,3,0,0,0,0,0,0
+1,42,1,2,0,0,0,22,0,0,0,-1--1--1,,1|(160,90)|
+1,43,2,3,0,0,0,22,0,0,0,-1--1--1,,1|(305,90)|
+1,44,3,4,0,0,0,22,0,0,0,-1--1--1,,1|(460,90)|
+1,45,4,5,0,0,0,22,0,0,0,-1--1--1,,1|(620,90)|
+1,46,3,6,0,0,0,22,0,0,0,-1--1--1,,1|(380,145)|
+1,47,6,7,0,0,0,22,0,0,0,-1--1--1,,1|(380,255)|
+1,48,8,7,0,0,0,22,0,0,0,-1--1--1,,1|(460,310)|
+1,49,7,8,0,0,0,22,0,0,0,-1--1--1,,1|(460,310)|
+1,50,9,8,0,0,0,22,0,0,0,-1--1--1,,1|(620,310)|
+1,51,8,9,0,0,0,22,0,0,0,-1--1--1,,1|(620,310)|
+1,52,17,9,0,0,0,22,0,0,0,-1--1--1,,1|(700,365)|
+1,53,8,10,0,0,0,22,0,0,0,-1--1--1,,1|(620,255)|
+1,54,11,12,0,0,0,22,0,0,0,-1--1--1,,1|(165,495)|
+1,55,12,13,0,0,0,22,0,0,0,-1--1--1,,1|(320,495)|
+1,56,14,13,0,0,0,22,0,0,0,-1--1--1,,1|(480,545)|
+1,57,15,13,0,0,0,22,0,0,0,-1--1--1,,1|(400,465)|
+1,58,13,14,0,0,0,22,0,0,0,-1--1--1,,1|(480,545)|
+1,59,8,15,0,0,0,22,0,0,0,-1--1--1,,1|(470,360)|
+1,60,13,16,0,0,0,22,0,0,0,-1--1--1,,1|(480,495)|
+1,61,16,17,0,0,0,22,0,0,0,-1--1--1,,1|(630,445)|
+1,62,17,18,0,0,0,22,0,0,0,-1--1--1,,1|(780,420)|
+1,63,19,18,0,0,0,22,0,0,0,-1--1--1,,1|(935,420)|
+1,64,18,19,0,0,0,22,0,0,0,-1--1--1,,1|(935,420)|
+1,65,20,19,0,0,0,22,0,0,0,-1--1--1,,1|(1010,465)|
+1,66,21,19,0,0,0,22,0,0,0,-1--1--1,,1|(1070,465)|
+1,67,22,19,0,0,0,22,0,0,0,-1--1--1,,1|(1070,390)|
+1,68,23,19,0,0,0,22,0,0,0,-1--1--1,,1|(1095,430)|
+1,69,19,20,0,0,0,22,0,0,0,-1--1--1,,1|(1010,465)|
+1,70,19,21,0,0,0,22,0,0,0,-1--1--1,,1|(1070,465)|
+1,71,24,22,0,0,0,22,0,0,0,-1--1--1,,1|(1070,330)|
+1,72,34,22,0,0,0,22,0,0,0,-1--1--1,,1|(1305,235)|
+1,73,37,22,0,0,0,22,0,0,0,-1--1--1,,1|(1305,355)|
+1,74,19,23,0,0,0,22,0,0,0,-1--1--1,,1|(1095,430)|
+1,75,25,23,0,0,0,22,0,0,0,-1--1--1,,1|(1255,320)|
+1,76,19,24,0,0,0,22,0,0,0,-1--1--1,,1|(1010,360)|
+1,77,24,26,0,0,0,22,0,0,0,-1--1--1,,1|(1010,250)|
+1,78,26,27,0,0,0,22,0,0,0,-1--1--1,,1|(935,200)|
+1,79,37,27,0,0,0,22,0,0,0,-1--1--1,,1|(1170,275)|
+1,80,5,28,0,0,0,22,0,0,0,-1--1--1,,1|(780,100)|
+1,81,10,28,0,0,0,22,0,0,0,-1--1--1,,1|(780,155)|
+1,82,25,28,0,0,0,22,0,0,0,-1--1--1,,1|(1095,155)|
+1,83,27,29,0,0,0,22,0,0,0,-1--1--1,,1|(935,155)|
+1,84,28,29,0,0,0,22,0,0,0,-1--1--1,,1|(935,110)|
+1,85,5,31,0,0,0,22,0,0,0,-1--1--1,,1|(930,120)|
+1,86,25,31,0,0,0,22,0,0,0,-1--1--1,,1|(1245,175)|
+1,87,26,31,0,0,0,22,0,0,0,-1--1--1,,1|(1085,175)|
+1,88,29,31,0,0,0,22,0,0,0,-1--1--1,,1|(1085,130)|
+1,89,30,31,0,0,0,22,0,0,0,-1--1--1,,1|(1160,105)|
+1,90,24,32,0,0,0,22,0,0,0,-1--1--1,,1|(1170,300)|
+1,91,31,33,0,0,0,22,0,0,0,-1--1--1,,1|(1245,130)|
+1,92,32,33,0,0,0,22,0,0,0,-1--1--1,,1|(1330,205)|
+1,93,33,34,0,0,0,22,0,0,0,-1--1--1,,1|(1405,110)|
+1,94,35,34,0,0,0,22,0,0,0,-1--1--1,,1|(1480,170)|
+1,95,36,34,0,0,0,22,0,0,0,-1--1--1,,1|(1555,110)|
+1,96,34,35,0,0,0,22,0,0,0,-1--1--1,,1|(1480,170)|
+1,97,34,36,0,0,0,22,0,0,0,-1--1--1,,1|(1555,110)|
+1,98,35,37,0,0,0,22,0,0,0,-1--1--1,,1|(1480,290)|
+1,99,38,37,0,0,0,22,0,0,0,-1--1--1,,1|(1555,350)|
+1,100,40,37,0,0,0,22,0,0,0,-1--1--1,,1|(1480,425)|
+1,101,37,38,0,0,0,22,0,0,0,-1--1--1,,1|(1555,350)|
+1,102,37,40,0,0,0,22,0,0,0,-1--1--1,,1|(1480,425)|
+1,103,39,40,0,0,0,22,0,0,0,-1--1--1,,1|(1555,500)|
+1,104,40,41,0,0,0,22,0,0,0,-1--1--1,,1|(1480,555)|
 ///---\\\
-:L<%^E!@
-1:current.vdfx
-4:Time
-5:Fish Stock
-9:current
-19:100,0
-24:1945
-25:2030
-26:2030
+:L<%^E!@
+9:Current
 15:0,0,0,0,0,0
-27:0,
+19:100,0
+27:2,
 34:0,
-42:0
-72:0
-73:0
-95:0
-96:0
-97:0
-77:0
-78:0
-102:1
-93:0
-94:0
-92:0
-91:0
-90:0
-87:0
-75:
-43:
-103:8,8,8,3,8
-105:0,0,0,0,0,0,0,0,0,0
-104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
+4:Time
+5:Adult Whitefish
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+42:1
+24:1980
+25:2060
+26:2060
