@@ -1,0 +1,830 @@
+{UTF-8}
+
+One year = 1
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Calendar year = Time / One year
+~ Dmnl
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Observed phosphorus = WITH LOOKUP(Calendar year,((1960,15),(1961,19),(1962,24),(1963,30),(1964,34),(1965,36),(1966,35),(1967,45.08008396),(1968,43.68714582),(1969,46.99277962),(1970,52.47782448),(1971,52.62667851),(1972,69.62487758),(1973,76.48984991),(1974,78.92767014),(1975,80.13700167),(1976,83.61571156),(1977,83.89418649),(1978,77.76301801),(1979,81.41702606),(1980,78.74689097),(1981,78.4857334),(1982,73.80623378),(1983,70.92296054),(1984,64.73945819),(1985,62.1410875),(1986,58.65041924),(1987,52.43531224),(1988,42.13868932),(1989,40.06212168),(1990,36.26895312),(1991,32.47200666),(1992,29.89544706),(1993,26.17262711),(1994,24.78895398),(1995,22.67533413),(1996,18.97534677),(1997,16.74424971),(1998,15.36669331),(1999,13.98335328),(2000,12.8487837),(2001,11.57537385),(2002,10.71225046),(2003,9.98535346),(2004,8.90701432),(2005,8.50493767),(2006,7.61757596),(2007,7.54882151),(2008,7.55897289),(2009,6.42837972),(2010,5.84512833),(2011,5.91819271),(2012,6.32143411),(2013,6.72849179),(2014,6.94840528),(2015,7.63042567),(2016,7.9836097),(2017,7.45544508),(2018,7.6412732),(2019,6.15904782),(2020,6.28603038),(2021,5.98077639),(2022,6.24800391),(2023,5.39825772),(2024,6.14933394),(2025,5.34275851)))
+~ ugP/L
+~ OBSERVATIONS from IGKB/BOWIS or the Haase et al. public data repository. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+Observed oxygen = WITH LOOKUP(Calendar year,((1963,5.2),(1964,3.5),(1965,5.1),(1966,4.8),(1967,6.1),(1968,5.6),(1969,5.8),(1970,7),(1971,2.4),(1972,3.4),(1973,2.3),(1974,4.8),(1975,4.6),(1976,3.4),(1977,6.5),(1978,6.4),(1979,6.4),(1980,5.3),(1981,7),(1982,5.8),(1983,6.3),(1984,6.2),(1985,5.6),(1986,5.6),(1987,6.36),(1988,4.6),(1989,4.3),(1990,4.3),(1991,5),(1992,6.3),(1993,5),(1994,5.9),(1995,6.12),(1996,6.3),(1997,6.5),(1998,6.1),(1999,7),(2000,7.2),(2001,6.1),(2002,6.8),(2003,6.7),(2004,7.2),(2005,7.5),(2006,7.3),(2007,7),(2008,6.6),(2009,6.6),(2010,7.9),(2011,6.3),(2012,7.2),(2013,6.2),(2014,6.54571129),(2015,5.86572285),(2016,5.2),(2017,6.1),(2018,6.4),(2019,7.5),(2020,7),(2021,6.9),(2022,6.2),(2023,6.8),(2024,6.5),(2025,6)))
+~ mgO2/L
+~ OBSERVATIONS from IGKB/BOWIS or the Haase et al. public data repository. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+Observed algae = WITH LOOKUP(Calendar year,((1961,0.48577),(1962,0.5748),(1965,0.694365),(1966,0.689115),(1967,0.80812),(1968,0.83235),(1969,0.768175),(1970,0.862575),(1971,0.66491),(1972,1.08843),(1973,0.83351),(1974,0.84098),(1975,0.801695),(1976,1.25765),(1977,1.236905),(1978,1.408555),(1979,1.27929),(1980,1.30861),(1981,1.33796),(1982,0.764195),(1983,0.859075),(1984,1.001725),(1985,0.990985),(1986,1.234775),(1987,0.939225),(1988,1.696075),(1989,1.25725),(1990,0.81587),(1991,0.61593),(1992,0.590375),(1993,0.65655),(1994,0.512385),(1995,0.5013405),(1996,0.667937),(1997,0.6633465),(1998,0.6291695),(1999,0.4519935),(2000,0.4469585),(2001,0.3331065),(2002,0.6515425),(2003,0.460454),(2004,0.420721),(2005,0.476162),(2006,0.426537),(2007,0.571783),(2008,0.4732725),(2009,0.627191920833334),(2010,0.722861),(2011,0.9113),(2012,0.42133060752177),(2013,0.389187610881393),(2014,0.475622683673913),(2015,0.556648598896273),(2016,0.660586777478261),(2017,0.505880098),(2018,0.469780872625),(2019,0.509038663603333),(2020,0.52203145454123),(2021,0.511097278850883),(2022,0.457126100075277),(2023,0.425919018428105),(2024,0.5979884),(2025,0.497013914)))
+~ mgA/L
+~ OBSERVATIONS from IGKB/BOWIS or the Haase et al. public data repository. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+Observed zooplankton = WITH LOOKUP(Calendar year,((1961,607893),(1962,915800),(1963,1129500),(1964,1074100),(1965,821400),(1966,1325100),(1967,835400),(1968,986800),(1969,1184500),(1970,1470200),(1971,778000),(1972,859800),(1973,1418000),(1974,1152110),(1975,864500),(1976,1077100),(1977,799100),(1978,1129900),(1979,551080),(1980,885430),(1981,1125050),(1982,1004300),(1983,782000),(1984,873900),(1985,754360),(1986,907500),(1987,629819),(1988,932600),(1989,917976),(1990,995625),(1991,1051247),(1992,825317),(1993,719284),(1994,694464),(1996,294058),(1997,353985),(1998,169656),(1999,353945),(2000,193013),(2001,630581),(2002,604810),(2003,494407),(2004,211443),(2005,187557),(2006,217555),(2007,199061),(2008,328815),(2009,258681),(2010,230509),(2011,231258),(2012,283287),(2013,314665),(2014,310793),(2015,247703),(2016,281155),(2017,300725),(2018,450999),(2019,277512),(2020,420152),(2021,418637),(2022,428761),(2023,385017),(2024,304334),(2025,299600)))
+~ crustaceans/m2
+~ OBSERVATIONS from IGKB/BOWIS or the Haase et al. public data repository. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+Observed bottom temperature = WITH LOOKUP(Calendar year,((2016,4.76666666666667),(2017,4.81666666666667),(2018,4.68333333333333),(2019,4.75833333333333),(2020,4.94166666666667),(2021,5.11818181818182),(2022,5.26666666666667),(2023,5.375),(2024,5.55833333333333),(2025,5.65)))
+~ degC
+~ OBSERVATIONS from IGKB/BOWIS or the Haase et al. public data repository. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+Observed catch = WITH LOOKUP(Calendar year,((1986,436),(1987,357),(1988,243),(1989,195),(1990,442),(1991,888),(1992,783),(1993,532),(1994,725),(1995,735),(1996,495),(1997,957),(1998,971),(1999,898),(2000,681),(2001,618),(2002,733),(2003,775),(2004,805),(2005,637),(2006,468),(2007,425),(2008,538),(2009,576),(2010,622),(2011,629),(2012,336),(2013,294),(2014,299),(2015,152),(2016,205),(2017,195),(2018,127),(2019,52),(2020,189),(2021,107),(2022,21)))
+~ tFish/Year
+~ OBSERVATIONS from IGKB/BOWIS or the Haase et al. public data repository. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+Observed survey index = WITH LOOKUP(Calendar year,((1997,40.6623119007775),(1998,24.293443365573),(1999,32.8628295748278),(2000,27.1109333858092),(2001,22.0922418502671),(2002,15.5818458456421),(2003,17.6980125123956),(2004,23.131355852538),(2005,23.1869250746228),(2006,17.7083945150067),(2007,5.21130598710094),(2008,7.06353084470503),(2009,11.2908232823907),(2010,11.7157812423354),(2011,25.5246715974804),(2012,4.34425500157869),(2013,2.06984126984127),(2014,3.48550347222222),(2015,1.52176870748299),(2016,2.10952380952381),(2017,4.42293192918193),(2018,6.82215010611903),(2019,0.428571428571429),(2020,8.51325659711321),(2021,0.42422619047619),(2022,0.188055555555556)))
+~ surveyUnit
+~ OBSERVATIONS from IGKB/BOWIS or the Haase et al. public data repository. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+Mean adult weight = WITH LOOKUP(Calendar year,((1997,375.229878510684),(1998,358.008639071602),(1999,355.045361322899),(2000,339.644803043695),(2001,330.400293547021),(2002,341.07493186552),(2003,339.801840237995),(2004,371.280361454751),(2005,344.725965711206),(2006,339.354784622182),(2007,311.442476383266),(2008,301.696571672147),(2009,297.93586043586),(2010,299.733692697311),(2011,327.339299876084),(2012,273.688065099458),(2013,289.777777777778),(2014,274.4833984375),(2015,279.625),(2016,259.317073170732),(2017,291.393162393162),(2018,288.938122141512),(2019,270),(2020,309.037836714568),(2021,296.958333333333),(2022,338.5)))
+~ gFish/fish
+~ OBSERVATIONS from IGKB/BOWIS or the Haase et al. public data repository. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+Historical effort = WITH LOOKUP(Calendar year,((1997,0.42952816359767),(1998,0.414888582333818),(1999,0.520867727060983),(2000,0.521785583812861),(2001,0.513754782027747),(2002,0.750108859168218),(2003,1.03056249702373),(2004,1.08074242216306),(2005,1.14866105419605),(2006,1.1062417597827),(2007,1.34538881261621),(2008,1.60862306507002),(2009,1.57867737077081),(2010,1.46044524366267),(2011,1.48972407671347),(2012,1.49004195602793),(2013,1.3660093880709),(2014,1.27651674032599),(2015,1.14570017707407),(2016,1.20389337582736),(2017,1.22669660396297),(2018,1.34376996080894),(2019,0.636158482079707),(2020,0.967581405834887),(2021,1.12436628412788),(2022,1.04240416044102)))
+~ Dmnl
+~ OBSERVATIONS from IGKB/BOWIS or the Haase et al. public data repository. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+Observed phosphorus slope = WITH LOOKUP(INTEGER(Calendar year),((1960,4),(1961,5),(1962,6),(1963,4),(1964,2),(1965,-1),(1966,10.08008396),(1967,-1.39293814000001),(1968,3.3056338),(1969,5.48504486),(1970,0.148854029999995),(1971,16.99819907),(1972,6.86497233),(1973,2.43782023),(1974,1.20933153),(1975,3.47870988999999),(1976,0.278474930000002),(1977,-6.13116848),(1978,3.65400805),(1979,-2.67013509),(1980,-0.261157569999995),(1981,-4.67949962),(1982,-2.88327323999999),(1983,-6.18350235000001),(1984,-2.59837069),(1985,-3.49066826),(1986,-6.215107),(1987,-10.29662292),(1988,-2.07656764),(1989,-3.79316856),(1990,-3.79694646),(1991,-2.5765596),(1992,-3.72281995),(1993,-1.38367313),(1994,-2.11361985),(1995,-3.69998736),(1996,-2.23109706),(1997,-1.3775564),(1998,-1.38334003),(1999,-1.13456958),(2000,-1.27340985),(2001,-0.86312339),(2002,-0.726896999999999),(2003,-1.07833914),(2004,-0.40207665),(2005,-0.88736171),(2006,-0.0687544500000001),(2007,0.0101513799999999),(2008,-1.13059317),(2009,-0.58325139),(2010,0.0730643799999999),(2011,0.403241400000001),(2012,0.407057679999999),(2013,0.219913490000001),(2014,0.68202039),(2015,0.35318403),(2016,-0.52816462),(2017,0.18582812),(2018,-1.48222538),(2019,0.12698256),(2020,-0.30525399),(2021,0.26722752),(2022,-0.84974619),(2023,0.75107622),(2024,-0.80657543),(2025,0)))
+~ ugP/L/Year
+~ DERIVED next-year difference in observed P; not a measured external load. Linear interpolation and endpoint holding are assumptions outside observed points.
+|
+
+P concentration conversion = 47.6
+~ tP*L/ugP
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+P loss rate = 0.6
+~ 1/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Maximum internal P release = 300
+~ tP/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Anoxia threshold = 0.05
+~ mgO2/L
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Phosphorus load multiplier = 1
+~ Dmnl
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Policy start year = 2027
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Initial phosphorus = 797.026286196
+~ tP
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Algae max production = 2.01781053593311
+~ mgA/L/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+P half saturation = 8
+~ ugP/L
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Algae turnover time = 0.5
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Initial algae = 0.6633465
+~ mgA/L
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Zooplankton production = 512194.689730048
+~ crustaceans/m2/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Algae food half saturation = 0.5
+~ mgA/L
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Zoo natural mortality = 0.8
+~ 1/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Stickleback zoo mortality = 0.2
+~ 1/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Whitefish clearance = 1e-08
+~ m2/fish/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Initial zooplankton = 353985
+~ crustaceans/m2
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Reference zooplankton = 231258
+~ crustaceans/m2
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Reference temperature = 4.76666666666667
+~ degC
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Temperature response = 0.1
+~ 1/degC
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Warming rate = 0
+~ degC/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Warming start year = 2025
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+O2 mixing rate = 4.99999999999704
+~ 1/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+O2 saturation proxy = 10
+~ mgO2/L
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+O2 demand coefficient = 15.5690719571558
+~ mgO2/mgA
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Initial oxygen = 6.5
+~ mgO2/L
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Stickleback invasion year = 2012
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Stickleback ramp duration = 1
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Stickleback reduction = 0
+~ Dmnl
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Food half saturation = 92503.2
+~ crustaceans/m2
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Food normalization = 0.714285714285714
+~ Dmnl
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Oxygen half saturation = 2
+~ mgO2/L
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Oxygen normalization = 0.772727272727273
+~ Dmnl
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Eggs per adult = 10000
+~ fish/fish/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Egg duration = 0.25
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Juvenile stage duration = 1.125
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Juvenile mortality rate = 0.2
+~ 1/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Potential recruits per adult = 0.802388950654938
+~ fish/fish/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Recruitment density scale = 2990.76483814287
+~ tFish
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Egg temperature sensitivity = 0.05
+~ 1/degC
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Stocking program = 0
+~ fish/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Stickleback egg predation = 3.02595368380239
+~ 1/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Adult natural mortality rate = 0.2
+~ 1/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Starvation mortality rate = 0.2
+~ 1/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Fishing mortality scale = 0.2528629837523
+~ 1/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Ban start year = 2024
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Ban end year = 2027
+~ Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Ban strength = 1
+~ Dmnl
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Post ban effort = 0.2
+~ Dmnl
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Catch quota = 1000000
+~ tFish/Year
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Weight conversion = 1000000
+~ gFish/tFish
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Initial adult biomass = 5510.96885341079
+~ tFish
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Initial adult weight = 375.229878510684
+~ gFish/fish
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+Survey catchability = 0.00567084459342001
+~ surveyUnit/tFish
+~ ASSUMPTION or restored fitted coefficient; see documentation.
+|
+
+External P load reconstructed = MAX(0,P concentration conversion*(Observed phosphorus slope+P loss rate*Observed phosphorus))
+~ tP/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+P inflow = External P load reconstructed*IF THEN ELSE(Time>=Policy start year,Phosphorus load multiplier,1)
+~ tP/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+P release from sediment = Maximum internal P release*MAX(0,1-Deep water O2/Anoxia threshold)
+~ tP/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+P sedimentation and outflow = P loss rate*Phosphorus
+~ tP/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Phosphorus = INTEG(P inflow+P release from sediment-P sedimentation and outflow,Initial phosphorus)
+~ tP
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+P concentration = Phosphorus/P concentration conversion
+~ ugP/L
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Algae growth = Algae max production*P concentration/(P half saturation+P concentration)
+~ mgA/L/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Algae dieback = Algae/Algae turnover time
+~ mgA/L/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Algae = INTEG(Algae growth-Algae dieback,Initial algae)
+~ mgA/L
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Zooplankton growth = Zooplankton production*Algae/(Algae food half saturation+Algae)
+~ crustaceans/m2/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Zooplankton mortality = Zoo natural mortality*Zooplankton
+~ crustaceans/m2/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Grazing by whitefish = Whitefish clearance*Adult whitefish*Zooplankton
+~ crustaceans/m2/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Grazing by sticklebacks = Stickleback zoo mortality*Stickleback pressure*Zooplankton
+~ crustaceans/m2/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Zooplankton = INTEG(Zooplankton growth-Zooplankton mortality-Grazing by whitefish-Grazing by sticklebacks,Initial zooplankton)
+~ crustaceans/m2
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Water temperature = Observed bottom temperature+Warming rate*MAX(0,Time-Warming start year)
+~ degC
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+O2 resupply by winter mixing = O2 mixing rate*MAX(0,O2 saturation proxy-Deep water O2)*EXP(-Temperature response*(Water temperature-Reference temperature))
+~ mgO2/L/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+O2 depletion = MIN(Deep water O2/TIME STEP,O2 demand coefficient*Algae dieback)
+~ mgO2/L/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Deep water O2 = INTEG(O2 resupply by winter mixing-O2 depletion,Initial oxygen)
+~ mgO2/L
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Stickleback pressure = MAX(0,MIN(1,(Time-Stickleback invasion year)/Stickleback ramp duration))*IF THEN ELSE(Time>=Policy start year,1-MAX(0,MIN(1,Stickleback reduction)),1)
+~ Dmnl
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Food factor = MIN(1.5,MAX(0.05,(Zooplankton/(Food half saturation+Zooplankton))/Food normalization))
+~ Dmnl
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Oxygen factor = Deep water O2/(Oxygen half saturation+Deep water O2)/Oxygen normalization
+~ Dmnl
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Base egg survival = Potential recruits per adult/Eggs per adult
+~ Dmnl
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Egg survival fraction = MIN(1,MAX(0,Base egg survival*Food factor*Oxygen factor*EXP(-Egg temperature sensitivity*MAX(0,Water temperature-Reference temperature))/(1+Adult biomass/Recruitment density scale)))
+~ Dmnl
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Spawning = Eggs per adult*Adult whitefish
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Stocking = IF THEN ELSE(Time>=Policy start year,MAX(0,Stocking program),0)
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Egg stage exit = Eggs and larvae/Egg duration
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Early recruitment = Egg survival fraction*Egg stage exit
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Egg and larval mortality = (1-Egg survival fraction)*Egg stage exit+Stickleback egg predation*Stickleback pressure*Eggs and larvae
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Eggs and larvae = INTEG(Spawning+Stocking-Early recruitment-Egg and larval mortality,Initial eggs)
+~ fish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Juvenile progression = Juvenile year 1/Juvenile stage duration
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Maturation = Juvenile year 2/Juvenile stage duration
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Juvenile 1 mortality = Juvenile mortality rate*Juvenile year 1
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Juvenile 2 mortality = Juvenile mortality rate*Juvenile year 2
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Juvenile year 1 = INTEG(Early recruitment-Juvenile progression-Juvenile 1 mortality,Initial juvenile 1)
+~ fish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Juvenile year 2 = INTEG(Juvenile progression-Maturation-Juvenile 2 mortality,Initial juvenile 2)
+~ fish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Natural death = (Adult natural mortality rate+Starvation mortality rate*MAX(0,1-Food factor))*Adult whitefish
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Fishing mortality = Fishing mortality scale*IF THEN ELSE(Time<Ban start year,Historical effort,IF THEN ELSE(Time<Ban end year,Historical effort*(1-MAX(0,MIN(1,Ban strength))),MAX(0,Post ban effort)))
+~ 1/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Adult biomass = Adult whitefish*Mean adult weight/Weight conversion
+~ tFish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Catch = MIN(Fishing mortality*Adult whitefish,MIN(Adult whitefish/TIME STEP,MAX(0,Catch quota)*Weight conversion/Mean adult weight))
+~ fish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Catch biomass = Catch*Mean adult weight/Weight conversion
+~ tFish/Year
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Adult whitefish = INTEG(Maturation-Natural death-Catch,Initial adults)
+~ fish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Initial adults = Initial adult biomass*Weight conversion/Initial adult weight
+~ fish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Initial eggs = Eggs per adult*Initial adults*Egg duration
+~ fish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Initial juvenile 1 = Base egg survival*Initial eggs/Egg duration/(1/Juvenile stage duration+Juvenile mortality rate)
+~ fish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Initial juvenile 2 = Initial juvenile 1/Juvenile stage duration/(1/Juvenile stage duration+Juvenile mortality rate)
+~ fish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Model survey index = Survey catchability*Adult biomass
+~ surveyUnit
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+Total fish excluding eggs = Juvenile year 1+Juvenile year 2+Adult whitefish
+~ fish
+~ Exploratory relationship; not a validated ecological forecast.
+|
+
+INITIAL TIME = 1997
+~ Year
+~ Simulation control.
+|
+
+FINAL TIME = 2050
+~ Year
+~ Simulation control.
+|
+
+TIME STEP = 0.0625
+~ Year
+~ Simulation control.
+|
+
+SAVEPER = 1
+~ Year
+~ Simulation control.
+|
+
+\\\---/// Sketch information - do not modify anything except names
+V300 Do not put anything below this section - it will be ignored
+*Stock and flow
+$0-0-0,0,Arial|11||0-0-0|0-0-0|0-0-0|-1--1--1|255-255-255|96,96,5,0
+12,1,0,660,28,570,12,8,4,0,0,-1,0,0,0
+LAKE CONSTANCE WHITEFISH - stock and flow model
+12,2,0,660,64,570,12,8,4,0,0,-1,0,0,0
+NUTRIENTS AND PLANKTON
+10,3,Phosphorus,200,155,65,20,3,3,0,0,0,0,0,0
+10,4,Algae,630,155,65,20,3,3,0,0,0,0,0,0
+10,5,Zooplankton,1060,155,65,20,3,3,0,0,0,0,0,0
+10,6,Deep water O2,630,390,65,20,3,3,0,0,0,0,0,0
+10,7,Eggs and larvae,240,650,65,20,3,3,0,0,0,0,0,0
+10,8,Juvenile year 1,550,650,65,20,3,3,0,0,0,0,0,0
+10,9,Juvenile year 2,850,650,65,20,3,3,0,0,0,0,0,0
+10,10,Adult whitefish,1150,650,65,20,3,3,0,0,0,0,0,0
+12,11,48,30,155,10,8,0,3,0,0,-1,0,0,0
+12,12,48,200,280,10,8,0,3,0,0,-1,0,0,0
+12,13,48,360,290,10,8,0,3,0,0,-1,0,0,0
+12,14,48,460,155,10,8,0,3,0,0,-1,0,0,0
+12,15,48,810,155,10,8,0,3,0,0,-1,0,0,0
+12,16,48,890,155,10,8,0,3,0,0,-1,0,0,0
+12,17,48,1260,155,10,8,0,3,0,0,-1,0,0,0
+12,18,48,1035,285,10,8,0,3,0,0,-1,0,0,0
+12,19,48,1240,285,10,8,0,3,0,0,-1,0,0,0
+12,20,48,390,390,10,8,0,3,0,0,-1,0,0,0
+12,21,48,850,390,10,8,0,3,0,0,-1,0,0,0
+12,22,48,30,650,10,8,0,3,0,0,-1,0,0,0
+12,23,48,240,510,10,8,0,3,0,0,-1,0,0,0
+12,24,48,240,810,10,8,0,3,0,0,-1,0,0,0
+12,25,48,550,810,10,8,0,3,0,0,-1,0,0,0
+12,26,48,850,810,10,8,0,3,0,0,-1,0,0,0
+12,27,48,1320,650,10,8,0,3,0,0,-1,0,0,0
+12,28,48,1150,810,10,8,0,3,0,0,-1,0,0,0
+11,29,48,105,155,6,8,34,3,0,0,1,0,0,0
+10,30,P inflow,105,183,65,15,40,3,0,0,-1,0,0,0
+1,31,29,3,4,0,0,22,0,0,0,-1--1--1,,1|(152,155)|
+1,32,29,11,100,0,0,22,0,0,0,-1--1--1,,1|(67,155)|
+11,33,48,200,220,6,8,34,3,0,0,1,0,0,0
+10,34,P sedimentation and outflow,110,235,65,15,40,3,0,0,-1,0,0,0
+1,35,33,12,4,0,0,22,0,0,0,-1--1--1,,1|(200,250)|
+1,36,33,3,100,0,0,22,0,0,0,-1--1--1,,1|(200,187)|
+11,37,48,320,225,6,8,34,3,0,0,1,0,0,0
+10,38,P release from sediment,375,225,65,15,40,3,0,0,-1,0,0,0
+1,39,37,3,4,0,0,22,0,0,0,-1--1--1,,1|(260,190)|
+1,40,37,13,100,0,0,22,0,0,0,-1--1--1,,1|(340,257)|
+11,41,48,535,155,6,8,34,3,0,0,1,0,0,0
+10,42,Algae growth,535,183,65,15,40,3,0,0,-1,0,0,0
+1,43,41,4,4,0,0,22,0,0,0,-1--1--1,,1|(582,155)|
+1,44,41,14,100,0,0,22,0,0,0,-1--1--1,,1|(497,155)|
+11,45,48,730,155,6,8,34,3,0,0,1,0,0,0
+10,46,Algae dieback,730,183,65,15,40,3,0,0,-1,0,0,0
+1,47,45,15,4,0,0,22,0,0,0,-1--1--1,,1|(770,155)|
+1,48,45,4,100,0,0,22,0,0,0,-1--1--1,,1|(680,155)|
+11,49,48,965,155,6,8,34,3,0,0,1,0,0,0
+10,50,Zooplankton growth,965,183,65,15,40,3,0,0,-1,0,0,0
+1,51,49,5,4,0,0,22,0,0,0,-1--1--1,,1|(1012,155)|
+1,52,49,16,100,0,0,22,0,0,0,-1--1--1,,1|(927,155)|
+11,53,48,1170,155,6,8,34,3,0,0,1,0,0,0
+10,54,Zooplankton mortality,1170,183,65,15,40,3,0,0,-1,0,0,0
+1,55,53,17,4,0,0,22,0,0,0,-1--1--1,,1|(1215,155)|
+1,56,53,5,100,0,0,22,0,0,0,-1--1--1,,1|(1115,155)|
+11,57,48,1035,235,6,8,34,3,0,0,1,0,0,0
+10,58,Grazing by whitefish,960,260,65,15,40,3,0,0,-1,0,0,0
+1,59,57,18,4,0,0,22,0,0,0,-1--1--1,,1|(1035,260)|
+1,60,57,5,100,0,0,22,0,0,0,-1--1--1,,1|(1047,195)|
+11,61,48,1190,235,6,8,34,3,0,0,1,0,0,0
+10,62,Grazing by sticklebacks,1215,260,65,15,40,3,0,0,-1,0,0,0
+1,63,61,19,4,0,0,22,0,0,0,-1--1--1,,1|(1215,260)|
+1,64,61,5,100,0,0,22,0,0,0,-1--1--1,,1|(1125,195)|
+11,65,48,490,390,6,8,34,3,0,0,1,0,0,0
+10,66,O2 resupply by winter mixing,490,418,65,15,40,3,0,0,-1,0,0,0
+1,67,65,6,4,0,0,22,0,0,0,-1--1--1,,1|(560,390)|
+1,68,65,20,100,0,0,22,0,0,0,-1--1--1,,1|(440,390)|
+11,69,48,750,390,6,8,34,3,0,0,1,0,0,0
+10,70,O2 depletion,750,418,65,15,40,3,0,0,-1,0,0,0
+1,71,69,21,4,0,0,22,0,0,0,-1--1--1,,1|(800,390)|
+1,72,69,6,100,0,0,22,0,0,0,-1--1--1,,1|(690,390)|
+11,73,48,130,650,6,8,34,3,0,0,1,0,0,0
+10,74,Spawning,130,678,65,15,40,3,0,0,-1,0,0,0
+1,75,73,7,4,0,0,22,0,0,0,-1--1--1,,1|(185,650)|
+1,76,73,22,100,0,0,22,0,0,0,-1--1--1,,1|(80,650)|
+11,77,48,240,740,6,8,34,3,0,0,1,0,0,0
+10,78,Stocking,160,740,65,15,40,3,0,0,-1,0,0,0
+1,79,77,7,4,0,0,22,0,0,0,-1--1--1,,1|(240,695)|
+1,80,77,24,100,0,0,22,0,0,0,-1--1--1,,1|(240,775)|
+11,81,48,240,570,6,8,34,3,0,0,1,0,0,0
+10,82,Egg and larval mortality,335,570,65,15,40,3,0,0,-1,0,0,0
+1,83,81,23,4,0,0,22,0,0,0,-1--1--1,,1|(240,540)|
+1,84,81,7,100,0,0,22,0,0,0,-1--1--1,,1|(240,610)|
+11,85,48,395,650,6,8,34,3,0,0,1,0,0,0
+10,86,Early recruitment,395,678,65,15,40,3,0,0,-1,0,0,0
+1,87,85,8,4,0,0,22,0,0,0,-1--1--1,,1|(472,650)|
+1,88,85,7,100,0,0,22,0,0,0,-1--1--1,,1|(317,650)|
+11,89,48,700,650,6,8,34,3,0,0,1,0,0,0
+10,90,Juvenile progression,700,678,65,15,40,3,0,0,-1,0,0,0
+1,91,89,9,4,0,0,22,0,0,0,-1--1--1,,1|(775,650)|
+1,92,89,8,100,0,0,22,0,0,0,-1--1--1,,1|(625,650)|
+11,93,48,1000,650,6,8,34,3,0,0,1,0,0,0
+10,94,Maturation,1000,678,65,15,40,3,0,0,-1,0,0,0
+1,95,93,10,4,0,0,22,0,0,0,-1--1--1,,1|(1075,650)|
+1,96,93,9,100,0,0,22,0,0,0,-1--1--1,,1|(925,650)|
+11,97,48,550,740,6,8,34,3,0,0,1,0,0,0
+10,98,Juvenile 1 mortality,635,740,65,15,40,3,0,0,-1,0,0,0
+1,99,97,25,4,0,0,22,0,0,0,-1--1--1,,1|(550,775)|
+1,100,97,8,100,0,0,22,0,0,0,-1--1--1,,1|(550,695)|
+11,101,48,850,740,6,8,34,3,0,0,1,0,0,0
+10,102,Juvenile 2 mortality,935,740,65,15,40,3,0,0,-1,0,0,0
+1,103,101,26,4,0,0,22,0,0,0,-1--1--1,,1|(850,775)|
+1,104,101,9,100,0,0,22,0,0,0,-1--1--1,,1|(850,695)|
+11,105,48,1250,650,6,8,34,3,0,0,1,0,0,0
+10,106,Natural death,1250,678,65,15,40,3,0,0,-1,0,0,0
+1,107,105,27,4,0,0,22,0,0,0,-1--1--1,,1|(1285,650)|
+1,108,105,10,100,0,0,22,0,0,0,-1--1--1,,1|(1200,650)|
+11,109,48,1150,740,6,8,34,3,0,0,1,0,0,0
+10,110,Catch,1215,740,65,15,40,3,0,0,-1,0,0,0
+1,111,109,28,4,0,0,22,0,0,0,-1--1--1,,1|(1150,775)|
+1,112,109,10,100,0,0,22,0,0,0,-1--1--1,,1|(1150,695)|
+10,113,P concentration,410,105,65,15,8,3,0,0,0,0,0,0
+10,114,Water temperature,290,390,65,15,8,3,0,0,0,0,0,0
+10,115,Stickleback pressure,1090,390,65,15,8,3,0,0,0,0,0,0
+10,116,Stickleback reduction,1240,460,65,15,8,3,0,0,0,0,0,0
+10,117,Food factor,920,490,65,15,8,3,0,0,0,0,0,0
+10,118,Oxygen factor,590,490,65,15,8,3,0,0,0,0,0,0
+10,119,Ban strength,1250,865,65,15,8,3,0,0,0,0,0,0
+10,120,Post ban effort,1080,865,65,15,8,3,0,0,0,0,0,0
+10,121,Catch quota,920,865,65,15,8,3,0,0,0,0,0,0
+10,122,Stocking program,250,865,65,15,8,3,0,0,0,0,0,0
+10,123,Phosphorus load multiplier,120,100,65,15,8,3,0,0,0,0,0,0
+1,124,3,113,1,0,43,0,0,0,0,-1--1--1,,1|(305,130)|
+1,125,113,42,1,0,43,0,0,0,0,-1--1--1,,1|(472,144)|
+1,126,4,50,1,0,43,0,0,0,0,-1--1--1,,1|(810,85)|
+1,127,46,70,1,0,43,0,0,0,0,-1--1--1,,1|(740,300)|
+1,128,6,38,1,0,45,0,0,0,0,-1--1--1,,1|(450,425)|
+1,129,114,66,1,0,45,0,0,0,0,-1--1--1,,1|(390,404)|
+1,130,114,82,1,0,43,0,0,0,0,-1--1--1,,1|(200,465)|
+1,131,6,118,1,0,43,0,0,0,0,-1--1--1,,1|(610,440)|
+1,132,118,86,1,0,43,0,0,0,0,-1--1--1,,1|(492,584)|
+1,133,5,117,1,0,43,0,0,0,0,-1--1--1,,1|(990,322)|
+1,134,117,86,1,0,43,0,0,0,0,-1--1--1,,1|(740,540)|
+1,135,10,74,1,0,43,0,0,0,0,-1--1--1,,1|(700,920)|
+1,136,10,58,1,0,43,0,0,0,0,-1--1--1,,1|(1340,425)|
+1,137,115,62,1,0,43,0,0,0,0,-1--1--1,,1|(1152,325)|
+1,138,115,82,1,0,43,0,0,0,0,-1--1--1,,1|(740,550)|
+1,139,116,115,1,0,45,0,0,0,0,-1--1--1,,1|(1165,425)|
+1,140,122,78,1,0,43,0,0,0,0,-1--1--1,,1|(205,802)|
+1,141,119,110,1,0,45,0,0,0,0,-1--1--1,,1|(1232,802)|
+1,142,120,110,1,0,43,0,0,0,0,-1--1--1,,1|(1147,802)|
+1,143,121,110,1,0,43,0,0,0,0,-1--1--1,,1|(1067,802)|
+1,144,123,30,1,0,43,0,0,0,0,-1--1--1,,1|(112,141)|
+12,145,0,675,965,570,12,8,4,0,0,-1,0,0,0
+R1 Internal P loading | B1 Predator-prey | R2 Reproduction | B2 Mortality and catch
+12,146,0,675,994,570,12,8,4,0,0,-1,0,0,0
+Explicit juvenile stages: nominal aging 0.25 + 1.125 + 1.125 = 2.5 years. Future results are scenarios.
+\\\---/// Sketch information - do not modify anything except names
+V300 Do not put anything below this section - it will be ignored
+*Parameters and calculations
+$0-0-0,0,Arial|11||0-0-0|0-0-0|0-0-0|-1--1--1|255-255-255|96,96,5,0
+12,1,0,550,28,520,12,8,4,0,0,-1,0,0,0
+PARAMETERS AND CALCULATIONS - double-click variables to edit equations
+10,2,One year,115,90,65,15,8,3,0,0,0,0,0,0
+10,3,Calendar year,330,90,65,15,8,3,0,0,0,0,0,0
+10,4,Mean adult weight,545,90,65,15,8,3,0,0,0,0,0,0
+10,5,Historical effort,760,90,65,15,8,3,0,0,0,0,0,0
+10,6,P concentration conversion,975,90,65,15,8,3,0,0,0,0,0,0
+10,7,P loss rate,115,152,65,15,8,3,0,0,0,0,0,0
+10,8,Maximum internal P release,330,152,65,15,8,3,0,0,0,0,0,0
+10,9,Anoxia threshold,545,152,65,15,8,3,0,0,0,0,0,0
+10,10,Policy start year,760,152,65,15,8,3,0,0,0,0,0,0
+10,11,Initial phosphorus,975,152,65,15,8,3,0,0,0,0,0,0
+10,12,Algae max production,115,214,65,15,8,3,0,0,0,0,0,0
+10,13,P half saturation,330,214,65,15,8,3,0,0,0,0,0,0
+10,14,Algae turnover time,545,214,65,15,8,3,0,0,0,0,0,0
+10,15,Initial algae,760,214,65,15,8,3,0,0,0,0,0,0
+10,16,Zooplankton production,975,214,65,15,8,3,0,0,0,0,0,0
+10,17,Algae food half saturation,115,276,65,15,8,3,0,0,0,0,0,0
+10,18,Zoo natural mortality,330,276,65,15,8,3,0,0,0,0,0,0
+10,19,Stickleback zoo mortality,545,276,65,15,8,3,0,0,0,0,0,0
+10,20,Whitefish clearance,760,276,65,15,8,3,0,0,0,0,0,0
+10,21,Initial zooplankton,975,276,65,15,8,3,0,0,0,0,0,0
+10,22,Reference zooplankton,115,338,65,15,8,3,0,0,0,0,0,0
+10,23,Reference temperature,330,338,65,15,8,3,0,0,0,0,0,0
+10,24,Temperature response,545,338,65,15,8,3,0,0,0,0,0,0
+10,25,Warming rate,760,338,65,15,8,3,0,0,0,0,0,0
+10,26,Warming start year,975,338,65,15,8,3,0,0,0,0,0,0
+10,27,O2 mixing rate,115,400,65,15,8,3,0,0,0,0,0,0
+10,28,O2 saturation proxy,330,400,65,15,8,3,0,0,0,0,0,0
+10,29,O2 demand coefficient,545,400,65,15,8,3,0,0,0,0,0,0
+10,30,Initial oxygen,760,400,65,15,8,3,0,0,0,0,0,0
+10,31,Stickleback invasion year,975,400,65,15,8,3,0,0,0,0,0,0
+10,32,Stickleback ramp duration,115,462,65,15,8,3,0,0,0,0,0,0
+10,33,Food half saturation,330,462,65,15,8,3,0,0,0,0,0,0
+10,34,Food normalization,545,462,65,15,8,3,0,0,0,0,0,0
+10,35,Oxygen half saturation,760,462,65,15,8,3,0,0,0,0,0,0
+10,36,Oxygen normalization,975,462,65,15,8,3,0,0,0,0,0,0
+10,37,Eggs per adult,115,524,65,15,8,3,0,0,0,0,0,0
+10,38,Egg duration,330,524,65,15,8,3,0,0,0,0,0,0
+10,39,Juvenile stage duration,545,524,65,15,8,3,0,0,0,0,0,0
+10,40,Juvenile mortality rate,760,524,65,15,8,3,0,0,0,0,0,0
+10,41,Potential recruits per adult,975,524,65,15,8,3,0,0,0,0,0,0
+10,42,Recruitment density scale,115,586,65,15,8,3,0,0,0,0,0,0
+10,43,Egg temperature sensitivity,330,586,65,15,8,3,0,0,0,0,0,0
+10,44,Stickleback egg predation,545,586,65,15,8,3,0,0,0,0,0,0
+10,45,Adult natural mortality rate,760,586,65,15,8,3,0,0,0,0,0,0
+10,46,Starvation mortality rate,975,586,65,15,8,3,0,0,0,0,0,0
+10,47,Fishing mortality scale,115,648,65,15,8,3,0,0,0,0,0,0
+10,48,Ban start year,330,648,65,15,8,3,0,0,0,0,0,0
+10,49,Ban end year,545,648,65,15,8,3,0,0,0,0,0,0
+10,50,Weight conversion,760,648,65,15,8,3,0,0,0,0,0,0
+10,51,Initial adult biomass,975,648,65,15,8,3,0,0,0,0,0,0
+10,52,Initial adult weight,115,710,65,15,8,3,0,0,0,0,0,0
+10,53,Survey catchability,330,710,65,15,8,3,0,0,0,0,0,0
+10,54,External P load reconstructed,545,710,65,15,8,3,0,0,0,0,0,0
+10,55,Base egg survival,760,710,65,15,8,3,0,0,0,0,0,0
+10,56,Egg survival fraction,975,710,65,15,8,3,0,0,0,0,0,0
+10,57,Egg stage exit,115,772,65,15,8,3,0,0,0,0,0,0
+10,58,Fishing mortality,330,772,65,15,8,3,0,0,0,0,0,0
+10,59,Adult biomass,545,772,65,15,8,3,0,0,0,0,0,0
+10,60,Catch biomass,760,772,65,15,8,3,0,0,0,0,0,0
+10,61,Initial adults,975,772,65,15,8,3,0,0,0,0,0,0
+10,62,Initial eggs,115,834,65,15,8,3,0,0,0,0,0,0
+10,63,Initial juvenile 1,330,834,65,15,8,3,0,0,0,0,0,0
+10,64,Initial juvenile 2,545,834,65,15,8,3,0,0,0,0,0,0
+10,65,Model survey index,760,834,65,15,8,3,0,0,0,0,0,0
+10,66,Total fish excluding eggs,975,834,65,15,8,3,0,0,0,0,0,0
+10,67,INITIAL TIME,115,896,65,15,8,3,0,0,0,0,0,0
+10,68,FINAL TIME,330,896,65,15,8,3,0,0,0,0,0,0
+10,69,TIME STEP,545,896,65,15,8,3,0,0,0,0,0,0
+10,70,SAVEPER,760,896,65,15,8,3,0,0,0,0,0,0
+\\\---/// Sketch information - do not modify anything except names
+V300 Do not put anything below this section - it will be ignored
+*Observations
+$0-0-0,0,Arial|11||0-0-0|0-0-0|0-0-0|-1--1--1|255-255-255|96,96,5,0
+12,1,0,500,30,470,12,8,4,0,0,-1,0,0,0
+EMBEDDED OBSERVATIONS - lookup interpolation and endpoint holding are explicit assumptions
+10,2,Observed phosphorus,160,115,65,15,8,3,0,0,0,0,0,0
+10,3,Observed oxygen,460,115,65,15,8,3,0,0,0,0,0,0
+10,4,Observed algae,760,115,65,15,8,3,0,0,0,0,0,0
+10,5,Observed zooplankton,160,215,65,15,8,3,0,0,0,0,0,0
+10,6,Observed bottom temperature,460,215,65,15,8,3,0,0,0,0,0,0
+10,7,Observed catch,760,215,65,15,8,3,0,0,0,0,0,0
+10,8,Observed survey index,160,315,65,15,8,3,0,0,0,0,0,0
+10,9,Observed phosphorus slope,460,315,65,15,8,3,0,0,0,0,0,0
