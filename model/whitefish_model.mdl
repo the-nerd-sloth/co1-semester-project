@@ -1,0 +1,602 @@
+{UTF-8}
+one year=1
+	~	Year
+	~	Makes Time dimensionless in lookup functions
+	|
+
+Observed zooplankton= WITH LOOKUP (Time/one year,
+		((1961,607.893),(1962,915.8),(1963,1129.5),(1964,1074.1),(1965,821.4),(1966,1325.1
+		),(1967,835.4),(1968,986.8),(1969,1184.5),(1970,1470.2),(1971,778),(1972,859.8),(1973\
+		,1418),(1974,1152.11),(1975,864.5),
+		(1976,1077.1),(1977,799.1),(1978,1129.9),(1979,551.08),(1980,885.43),(1981,1125.05)\
+		,(1982,1004.3),(1983,782),(1984,873.9
+		),(1985,754.36),(1986,907.5),(1987,629.819),(1988,932.6),(1989,917.976),(1990,995.625\
+		),(1991,1051.25),(1992,825.317),(1993
+		,719.284),(1994,694.464),(1996,294.058),(1997,353.985),(1998,169.656),(1999,353.945\
+		),(2000,193.013),(2001,630.581),(2002
+		,604.81),(2003,494.407),(2004,211.443),(2005,187.557),(2006,217.555),(2007,199.061)\
+		,(2008,328.815),(2009,258.681),(2010,
+		230.509),(2011,231.258),(2012,283.287),(2013,314.665),(2014,310.793),(2015,247.703)\
+		,(2016,281.155),(2017,300.725),(2018,
+		450.999),(2019,277.512),(2020,420.152),(2021,418.637),(2022,428.761),(2023,385.017)\
+		,(2024,304.334),(2025,299.6)))
+	~	kInd/m2
+	~	DATA for comparison: crustacean zooplankton (IGKB/BOWIS) 1961-2025, in \
+		1000 individuals per m2.
+	|
+
+Observed catch= WITH LOOKUP (Time/one year,
+		((1950,263),(1951,411),(1952,337),(1953,232),(1954,189),(1955,432),(1956,884),(1957\
+		,747
+		),(1958,505),(1959,716),(1960,726),(1961,474),(1962,368),(1963,147),(1964,126),(1965\
+		,379),(1966,137),(1967,126),(1968,242
+		),(1969,379),(1970,495),(1971,347),(1972,116),(1973,579),(1974,274),(1975,200),(1976\
+		,863),(1977,1211),(1978,453),(1979,442
+		),(1980,295),(1981,379),(1982,526),(1983,495),(1984,526),(1985,695),(1986,358),(1987\
+		,168),(1988,463),(1989,768),(1990,905
+		),(1991,1000),(1992,811),(1993,621),(1994,326),(1995,547),(1996,779),(1997,958),(1998\
+		,958),(1999,853),(2000,674),(2001,611
+		),(2002,726),(2003,726),(2004,800),(2005,632),(2006,442),(2007,411),(2008,537),(2009\
+		,547),(2010,600),(2011,621),(2012,337
+		),(2013,284),(2014,295),(2015,147),(2016,200),(2017,179),(2018,116),(2019,53),(2020\
+		,179),(2021,95),(2022,21),(2023,9.8),
+		(2024,0),(2025,0)))
+	~	t/Year
+	~	DATA for comparison: whitefish catch of professional fishers, Obersee \
+		(IGKB, Abb. 1, read from the chart); 2023 = 9.8 t (Frei & Kugler, 2026); \
+		2024-2025 fishing ban.
+	|
+
+Phosphorus concentration= WITH LOOKUP (Time/one year,
+		((1950,7),(1960,15),(1961,19),(1962,24),(1963,30),(1964,34),(1965,36),(1966,
+		35),(1967,45.1),(1968,43.7),(1969,47),(1970,52.5),(1971,52.6),(1972,69.6),(1973,76.5\
+		),(1974,78.9),(1975,80.1),(1976,83.6
+		),(1977,83.9),(1978,77.8),(1979,81.4),(1980,78.7),(1981,78.5),(1982,73.8),(1983,70.9\
+		),(1984,64.7),(1985,62.1),(1986,58.7
+		),(1987,52.4),(1988,42.1),(1989,40.1),(1990,36.3),(1991,32.5),(1992,29.9),(1993,26.2\
+		),(1994,24.8),(1995,22.7),(1996,19),
+		(1997,16.7),(1998,15.4),(1999,14),(2000,12.8),(2001,11.6),(2002,10.7),(2003,10),(2004\
+		,8.9),(2005,8.5),(2006,7.6),(2007,7.5
+		),(2008,7.6),(2009,6.4),(2010,5.8),(2011,5.9),(2012,6.3),(2013,6.7),(2014,6.9),(2015\
+		,7.6),(2016,8),(2017,7.5),(2018,7.6)
+		,(2019,6.2),(2020,6.3),(2021,6),(2022,6.2),(2023,5.4),(2024,6.1),(2025,5.3)))
+	~	ugP/L
+	~	DATA: total phosphorus, annual mean (IGKB/BOWIS) 1960-2025. 1950 = 7 ugP/L \
+		is an ASSUMPTION (before eutrophication). Held at the 2025 value \
+		afterwards.
+	|
+
+Deep water oxygen= WITH LOOKUP (Time/one year,
+		((1950,8),(1963,5.2),(1964,3.5),(1965,5.1),(1966,4.8),(1967,6.1),(1968,5.6),(1969,5.8
+		),(1970,7),(1971,2.4),(1972,3.4),(1973,2.3),(1974,4.8),(1975,4.6),(1976,3.4),(1977,\
+		6.5),(1978,6.4),(1979,6.4),(1980,5.3)
+		,(1981,7),(1982,5.8),(1983,6.3),(1984,6.2),(1985,5.6),(1986,5.6),(1987,6.36),(1988,\
+		4.6),(1989,4.3),(1990,4.3),(1991,5),(
+		1992,6.3),(1993,5),(1994,5.9),(1995,6.12),(1996,6.3),(1997,6.5),(1998,6.1),(1999,7)\
+		,(2000,7.2),(2001,6.1),(2002,6.8),(2003
+		,6.7),(2004,7.2),(2005,7.5),(2006,7.3),(2007,7),(2008,6.6),(2009,6.6),(2010,7.9),(2011\
+		,6.3),(2012,7.2),(2013,6.2),(2014,
+		6.5),(2015,5.9),(2016,5.2),(2017,6.1),(2018,6.4),(2019,7.5),(2020,7),(2021,6.9),(2022\
+		,6.2),(2023,6.8),(2024,6.5),(2025,6
+		)))
+	~	mgO2/L
+	~	DATA: minimum oxygen 1 m above the lake bottom (IGKB) 1963-2025. 1950 = 8 \
+		mgO2/L is an ASSUMPTION. Held at the 2025 value afterwards.
+	|
+
+Observed survey index= WITH LOOKUP (Time/one year,
+		((1997,40.66),(1998,24.29),(1999,32.86),(2000,27.11),(2001,22.09),(2002,15.58),
+		(2003,17.7),(2004,23.13),(2005,23.19),(2006,17.71),(2007,5.21),(2008,7.06),(2009,11.29\
+		),(2010,11.72),(2011,25.52),(2012,
+		4.34),(2013,2.07),(2014,3.49),(2015,1.52),(2016,2.11),(2017,4.42),(2018,6.82),(2019\
+		,0.43),(2020,8.51),(2021,0.42),(2022,
+		0.19)))
+	~	Dmnl
+	~	DATA for comparison: whitefish survey index (IGKB/IBKF) 1997-2022.
+	|
+
+Zooplankton = INTEG(Zooplankton growth-Zooplankton mortality-Grazing by whitefish-Grazing by sticklebacks\
+		,Initial zooplankton)
+	~	kInd/m2
+	~	STOCK: crustacean zooplankton (whitefish food), in 1000 individuals per m2.
+	|
+
+Zooplankton growth = Max zooplankton production*Phosphorus concentration/(Phosphorus concentration\
+		+Zooplankton P half saturation)
+	~	kInd/m2/Year
+	~	More phosphorus -> more algae -> more zooplankton (algae are not modelled \
+		separately).
+	|
+
+Zooplankton mortality = Zooplankton*Zooplankton mortality rate
+	~	kInd/m2/Year
+	~	Natural death of zooplankton.
+	|
+
+Grazing by whitefish = Zooplankton*Whitefish grazing rate*Adult whitefish
+	~	kInd/m2/Year
+	~	Zooplankton eaten by whitefish: more whitefish -> less food left (B1 \
+		predator-prey).
+	|
+
+Grazing by sticklebacks = Zooplankton*Stickleback grazing rate*Stickleback pressure
+	~	kInd/m2/Year
+	~	Zooplankton eaten by sticklebacks: competition with whitefish for food.
+	|
+
+Young whitefish = INTEG(Recruitment-Maturation-Young mortality,Initial young)
+	~	t
+	~	STOCK: young whitefish (eggs, larvae, juveniles) that are not yet \
+		catchable, in tonnes of future adult biomass.
+	|
+
+Adult whitefish = INTEG(Maturation-Natural death-Catch,Initial adults)
+	~	t
+	~	STOCK: adult (catchable, spawning) whitefish biomass in Lake Constance \
+		(Obersee).
+	|
+
+Recruitment = Adult whitefish*Max recruitment rate*Food effect*Oxygen effect*Stickleback egg effect
+	~	t/Year
+	~	New young whitefish per year: more adults -> more offspring (R1). Depends \
+		on food (zooplankton), deep-water oxygen and sticklebacks eating eggs and \
+		larvae.
+	|
+
+Maturation = Young whitefish/Maturation time
+	~	t/Year
+	~	Young fish become adults after about 2.5 years.
+	|
+
+Young mortality = Young whitefish*Young mortality rate
+	~	t/Year
+	~	Young fish that die before they mature.
+	|
+
+Natural death = Adult whitefish*Adult mortality rate
+	~	t/Year
+	~	Natural death of adults.
+	|
+
+Catch = IF THEN ELSE(Time<Ban start year,Fishing rate*Adult whitefish,IF THEN ELSE(Time\
+		<Ban end year,(1-Fishing ban)*Fishing rate*Adult whitefish,MIN(Catch from 2027,Fishing rate\
+		*Adult whitefish)))
+	~	t/Year
+	~	Catch (B2). Before 2024: a fixed share of the adult stock. 2024 - April \
+		2027: fishing ban. From May 2027: a fixed annual catch (scenario), at most \
+		Fishing rate x stock.
+	|
+
+Food effect = (Zooplankton/(Zooplankton+Food half saturation))/(Reference zooplankton\
+		/(Reference zooplankton+Food half saturation))
+	~	Dmnl
+	~	More zooplankton -> better fed whitefish -> more offspring survive. 1 at \
+		the reference zooplankton level.
+	|
+
+Oxygen effect = (Deep water oxygen/(Deep water oxygen+Oxygen half saturation))/(Reference oxygen\
+		/(Reference oxygen+Oxygen half saturation))
+	~	Dmnl
+	~	Whitefish eggs lie on the lake bottom over winter and die if oxygen is low \
+		(IGKB, 2014). 1 at the reference oxygen level.
+	|
+
+Stickleback egg effect = 1-Stickleback egg impact*Stickleback pressure
+	~	Dmnl
+	~	Share of whitefish eggs and larvae that are not eaten by sticklebacks.
+	|
+
+Stickleback pressure = IF THEN ELSE(Time<Stickleback start year,0,IF THEN ELSE(Time<Stickleback decline year\
+		,1,IF THEN ELSE(Time<Scenario start year,1-Stickleback decline,Stickleback pressure from 2027\
+		)))
+	~	Dmnl
+	~	Stickleback index: 0 before 2012, 1 from 2012 (spread into open water), \
+		reduced by 80 % from 2024, scenario value from 2027.
+	|
+
+Model survey index = Adult whitefish*Survey catchability
+	~	Dmnl
+	~	Model value comparable to the observed survey index.
+	|
+
+Max zooplankton production=3444.7
+	~	kInd/m2/Year
+	~	CALIBRATED against observed zooplankton 1961-2025.
+	|
+
+Zooplankton P half saturation = 21.309
+	~	ugP/L
+	~	CALIBRATED: phosphorus level at which zooplankton production is half its \
+		maximum.
+	|
+
+Zooplankton mortality rate = 2
+	~	1/Year
+	~	ASSUMPTION: zooplankton turns over quickly (several generations per year).
+	|
+
+Whitefish grazing rate = 0.000626102
+	~	1/(t*Year)
+	~	CALIBRATED: share of zooplankton eaten per t of adult whitefish and year.
+	|
+
+Stickleback grazing rate=0.203165
+	~	1/Year
+	~	CALIBRATED: share of zooplankton eaten by sticklebacks per year at full \
+		stickleback pressure.
+	|
+
+Food half saturation=213.009
+	~	kInd/m2
+	~	CALIBRATED: zooplankton level at which the food effect is halved.
+	|
+
+Reference zooplankton = 300
+	~	kInd/m2
+	~	Reference level, about today's zooplankton density (IGKB).
+	|
+
+Max recruitment rate=1.05091
+	~	1/Year
+	~	CALIBRATED: offspring (t) per t of adults and year at reference food and \
+		oxygen.
+	|
+
+Oxygen half saturation = 2
+	~	mgO2/L
+	~	ASSUMPTION: oxygen level at which egg survival is halved.
+	|
+
+Reference oxygen = 6
+	~	mgO2/L
+	~	Oxygen above 6 mg/L is considered a good supply of the deep water (IGKB, \
+		2018).
+	|
+
+Stickleback egg impact=0.505776
+	~	Dmnl
+	~	CALIBRATED: share of whitefish eggs/larvae eaten at full stickleback \
+		pressure.
+	|
+
+Stickleback start year = 2012
+	~	Year
+	~	Sticklebacks spread into the open water in 2012 (Wasser-Agenda 21, 2023; \
+		SRF, 2024).
+	|
+
+Stickleback decline year = 2024
+	~	Year
+	~	The stickleback population declined in 2024 (IGKB, n.d.-a).
+	|
+
+Stickleback decline = 0.8
+	~	Dmnl
+	~	Decline of about 80 % (IGKB, n.d.-a). SCENARIO 0 = no decline.
+	|
+
+Scenario start year = 2027
+	~	Year
+	~	From this year on the scenario values apply.
+	|
+
+Stickleback pressure from 2027 = 0.2
+	~	Dmnl
+	~	SCENARIO: 0.2 = stays low, 1 = renewed stickleback pressure.
+	|
+
+Maturation time=2.5
+	~	Year
+	~	ASSUMPTION: whitefish mature at about 2-3 years.
+	|
+
+Young mortality rate=0.3
+	~	1/Year
+	~	ASSUMPTION.
+	|
+
+Adult mortality rate=0.25
+	~	1/Year
+	~	ASSUMPTION: natural mortality of adults.
+	|
+
+Fishing rate = 0.5
+	~	1/Year
+	~	ASSUMPTION: share of the adult stock caught per year before the ban (about \
+		40 % per year).
+	|
+
+Ban start year = 2024
+	~	Year
+	~	Fishing ban from January 2024 (IBKF; Frei & Kugler, 2026).
+	|
+
+Ban end year = 2027.33
+	~	Year
+	~	Fishing reopens in May 2027 (SRF, 2026).
+	|
+
+Fishing ban = 1
+	~	Dmnl
+	~	SCENARIO switch: 1 = ban 2024-2027 as decided, 0 = no ban (fishing \
+		continues).
+	|
+
+Catch from 2027 = 25
+	~	t/Year
+	~	SCENARIO: annual catch from May 2027. Target of the IBKF: 20-30 t (SRF, \
+		2026).
+	|
+
+Initial adults = 906.673
+	~	t
+	~	CALIBRATED: adult stock in 1950.
+	|
+
+Initial young = 1511.98
+	~	t
+	~	Young stock in 1950, in equilibrium with the 1950 conditions.
+	|
+
+Initial zooplankton = 331.731
+	~	kInd/m2
+	~	Zooplankton in 1950, in equilibrium with the 1950 conditions.
+	|
+
+Survey catchability = 0.0156565
+	~	Dmnl/t
+	~	CALIBRATED: scales the model stock to the survey index.
+	|
+
+INITIAL TIME  = 1950
+	~	Year
+	~	Simulation start.
+	|
+
+FINAL TIME  = 2050
+	~	Year
+	~	Simulation end.
+	|
+
+TIME STEP  = 0.0625
+	~	Year
+	~	Euler integration step.
+	|
+
+SAVEPER  = 1
+	~	Year
+	~	Output interval.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Whitefish model
+$0-0-0,0,Arial|11||0-0-0|0-0-0|0-0-0|-1--1--1|255-255-255|96,96,58,0
+12,1,0,991,484,780,12,8,4,0,0,-1,0,0,0,0,0,0,0,0,0
+LAKE CONSTANCE WHITEFISH - simplified stock and flow model (1950-2050)
+10,2,Zooplankton,911,654,62,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,3,Young whitefish,711,984,62,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,4,Adult whitefish,1191,984,62,26,3,3,0,0,0,0,0,0,0,0,0,0,0,0
+12,5,48,631,654,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,6,0,771,654,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,7,Zooplankton growth,771,686,60,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,6,2,4,0,0,22,0,0,0,-1--1--1,,1|(813,654)|
+1,9,6,5,100,0,0,22,0,0,0,-1--1--1,,1|(703,654)|
+12,10,48,1191,654,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,11,0,1061,654,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,12,Zooplankton mortality,1061,686,60,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,13,11,10,4,0,0,22,0,0,0,-1--1--1,,1|(1124,654)|
+1,14,11,2,100,0,0,22,0,0,0,-1--1--1,,1|(1014,654)|
+12,15,48,881,834,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,16,0,881,764,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,17,Grazing by whitefish,791,764,60,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,16,15,4,0,0,22,0,0,0,-1--1--1,,1|(881,799)|
+1,19,16,2,100,0,0,22,0,0,0,-1--1--1,,1|(881,718)|
+12,20,48,951,834,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,21,0,951,764,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,22,Grazing by sticklebacks,1041,764,60,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,23,21,20,4,0,0,22,0,0,0,-1--1--1,,1|(951,799)|
+1,24,21,2,100,0,0,22,0,0,0,-1--1--1,,1|(951,718)|
+12,25,48,361,984,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,26,0,531,984,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,27,Recruitment,531,1016,60,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,28,26,3,4,0,0,22,0,0,0,-1--1--1,,1|(593,984)|
+1,29,26,25,100,0,0,22,0,0,0,-1--1--1,,1|(448,984)|
+11,30,0,951,984,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,31,Maturation,951,1016,60,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,32,30,4,4,0,0,22,0,0,0,-1--1--1,,1|(1043,984)|
+1,33,30,3,100,0,0,22,0,0,0,-1--1--1,,1|(859,984)|
+12,34,48,711,1204,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,35,0,711,1114,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,36,Young mortality,801,1114,60,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,37,35,34,4,0,0,22,0,0,0,-1--1--1,,1|(711,1159)|
+1,38,35,3,100,0,0,22,0,0,0,-1--1--1,,1|(711,1058)|
+12,39,48,1551,984,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,40,0,1401,984,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,41,Natural death,1401,1016,60,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,42,40,39,4,0,0,22,0,0,0,-1--1--1,,1|(1474,984)|
+1,43,40,4,100,0,0,22,0,0,0,-1--1--1,,1|(1324,984)|
+12,44,48,1191,1204,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+11,45,0,1191,1114,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,46,Catch,1251,1114,60,15,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,47,45,44,4,0,0,22,0,0,0,-1--1--1,,1|(1191,1159)|
+1,48,45,4,100,0,0,22,0,0,0,-1--1--1,,1|(1191,1058)|
+10,49,Phosphorus concentration,631,544,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,50,Max zooplankton production,461,604,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,51,Zooplankton P half saturation,831,544,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,52,Initial zooplankton,1051,564,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,53,Zooplankton mortality rate,1201,734,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,54,Whitefish grazing rate,711,824,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,55,Stickleback grazing rate,1121,824,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,56,Food effect,551,864,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,57,Food half saturation,391,814,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,58,Reference zooplankton,521,784,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,59,Oxygen effect,371,904,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,60,Deep water oxygen,261,834,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,61,Oxygen half saturation,261,954,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,62,Reference oxygen,261,1024,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,63,Max recruitment rate,341,1084,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,64,Stickleback egg effect,521,1204,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,65,Stickleback pressure,431,1294,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,66,Stickleback egg impact,641,1294,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,67,Stickleback start year,271,1234,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,68,Stickleback decline year,271,1304,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,69,Stickleback decline,271,1374,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,70,Stickleback pressure from 2027,491,1394,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,71,Scenario start year,711,1384,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,72,Maturation time,951,894,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,73,Young mortality rate,841,1234,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,74,Initial young,601,914,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,75,Adult mortality rate,1521,1084,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,76,Initial adults,1311,904,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,77,Fishing rate,1371,1244,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,78,Fishing ban,1071,1294,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,79,Ban start year,1191,1344,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,80,Ban end year,1351,1344,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,81,Catch from 2027,1521,1294,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,82,Model survey index,1491,814,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,83,Survey catchability,1661,754,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,84,Observed catch,1751,954,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,85,Observed survey index,1751,884,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,86,Observed zooplankton,1751,814,65,15,8,3,0,0,0,0,0,0,0,0,0,0,0,0
+10,87,Time,491,524,30,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,88,Time,251,744,30,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,89,Time,331,1164,30,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,90,Time,1091,1384,30,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,91,Time,1841,1004,30,12,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,92,52,2,0,0,0,0,0,0,1,-1--1--1,,1|(0,0)|
+1,93,74,3,0,0,0,0,0,0,1,-1--1--1,,1|(0,0)|
+1,94,76,4,0,0,0,0,0,0,1,-1--1--1,,1|(0,0)|
+1,95,50,7,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,96,49,7,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,97,51,7,0,0,45,0,0,0,0,-1--1--1,,1|(0,0)|
+1,98,2,12,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,99,53,12,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,100,4,17,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,101,54,17,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,102,2,17,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,103,55,22,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,104,65,22,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,105,2,22,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,106,4,27,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,107,56,27,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,108,63,27,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,109,59,27,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,110,64,27,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,111,72,31,0,0,45,0,0,0,0,-1--1--1,,1|(0,0)|
+1,112,3,31,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,113,73,36,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,114,3,36,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,115,75,41,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,116,4,41,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,117,4,46,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,118,80,46,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,119,79,46,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,120,81,46,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,121,78,46,0,0,45,0,0,0,0,-1--1--1,,1|(0,0)|
+1,122,77,46,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,123,90,46,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,124,87,49,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,125,57,56,0,0,45,0,0,0,0,-1--1--1,,1|(0,0)|
+1,126,58,56,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,127,2,56,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,128,60,59,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,129,61,59,0,0,45,0,0,0,0,-1--1--1,,1|(0,0)|
+1,130,62,59,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,131,88,60,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,132,66,64,0,0,45,0,0,0,0,-1--1--1,,1|(0,0)|
+1,133,65,64,0,0,45,0,0,0,0,-1--1--1,,1|(0,0)|
+1,134,71,65,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,135,69,65,0,0,45,0,0,0,0,-1--1--1,,1|(0,0)|
+1,136,68,65,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,137,70,65,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,138,67,65,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,139,89,65,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,140,4,82,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,141,83,82,0,0,43,0,0,0,0,-1--1--1,,1|(0,0)|
+1,142,91,84,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,143,91,85,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+1,144,91,86,0,0,0,0,0,0,0,-1--1--1,,1|(0,0)|
+12,145,0,951,1124,90,12,8,4,0,0,-1,0,0,0,0,0,0,0,0,0
+R1 Reproduction (+)
+12,146,0,781,874,90,12,8,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B1 Predator-prey (-)
+12,147,0,1311,1164,90,12,8,4,0,0,-1,0,0,0,0,0,0,0,0,0
+B2 Fishing (-)
+12,148,0,991,1444,780,12,8,4,0,0,-1,0,0,0,0,0,0,0,0,0
+DATA (lookups): phosphorus, deep-water oxygen; for comparison: observed catch, survey index, zooplankton.  SCENARIO levers: Fishing ban, Stickleback decline, Stickleback pressure from 2027, Catch from 2027.
+10,149,one year,250,640,46,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,150,149,49,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,151,149,60,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,152,149,84,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,153,149,85,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,154,149,86,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+///---\\\
+:GRAPH Number_of_adult_whitefish_over_time
+:TITLE Number of adult whitefish over time
+:X-AXIS Time
+:SCALE
+:VAR Adult whitefish
+:DATASET 
+:LINE-WIDTH 1
+
+:GRAPH Number_of_juvenile_whitefish_over_time
+:TITLE Number of young whitefish over time
+:SCALE
+:VAR Young whitefish
+:DATASET 
+:LINE-WIDTH 1
+
+:GRAPH Amount_of_Zooplankton_over_time
+:TITLE Number of Zooplankton over time
+:SCALE
+:VAR Zooplankton
+:DATASET 
+:LINE-WIDTH 1
+:L<%^E!@
+1:Base_run.vdfx
+1:Food_saturation_max.vdfx
+1:Food_saturation_min.vdfx
+1:Zooplankton_max.vdfx
+1:Zooplankton_min.vdfx
+1:Stickleback_grazing_max.vdfx
+1:Stickleback_grazing_min.vdfx
+1:Stickleback_egg_max.vdfx
+1:Stickleback_egg_min.vdfx
+1:Maturation_max.vdfx
+1:Maturation_min.vdfx
+1:Adult_mortality_max.vdfx
+1:Adult_mortality_min.vdfx
+1:Max_Recruitment_max.vdfx
+1:Max_Recruitment_min.vdfx
+4:Time
+5:Food half saturation
+9:Food_saturation_max
+19:58,0
+24:1950
+25:2050
+26:2050
+8:custom_graphs.vgd
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
