@@ -18,9 +18,7 @@ This is the semester project for the course of *CO1: Modelling of Complex System
 	- [Project Structure](#project-structure)
 	- [Getting Started](#getting-started)
 		- [Prerequisites](#prerequisites)
-		- [Installation](#installation)
 	- [Usage](#usage)
-	- [Roadmap](#roadmap)
 	- [Authors](#authors)
 	- [License](#license)
 
@@ -28,13 +26,19 @@ This is the semester project for the course of *CO1: Modelling of Complex System
 
 This repository contains the semester project for the ZHAW course of CO1: Modelling of Complex Systems.
 
-TODO 
+The aim is to develop a simplified system dynamics model of Lake Constance that links phosphorus, plankton, deep-water oxygen and the whitefish population for the period from 1950 to 2050, and to calibrate it using historical measurement data.
+
+![model](./images/fig_model_overview.png)
+
 
 [Back to top](#readme-top)
 
 ## Goals
 
-TODO
+The model will be used to address the following research questions:
+- H1: The model can reproduce the historical data.​
+- H2: The model can show the contribution effects of the 2024 fishing ban and the decline of the stickleback population to the recovery of the whitefish stock.​
+- H3: The model can simulate the maximum annual catch that can be permitted from 2027 onwards, to ensure that the stock remains above a reference level until 2050​ (on low and renewed stickleback pressure)​
 
 [Back to top](#readme-top)
 
@@ -45,36 +49,34 @@ TODO
 modelling-of-complex-systems/
 ├── README.md          # Project overview and instructions
 ├── LICENSE            # Project license
-├── model/             # Model files and related code
-├── presentation/      # Presentation files
+├── deliverable/       # Files to be submitted for evaluation
 ├── documentation/     # Main project documentation
-└── report/            # Source files for the final report
+├── images/            # Images related to the project
+└── model/             # Model files and related code
 ```
 
 [Back to top](#readme-top)
 
 ## Getting Started
-TODO
+
+```sh
+git clone https://github.com/the-nerd-sloth/co1-semester-project.git
+cd co1-semester-project/model
+# Open the Vensim model from the application
+```
 
 ### Prerequisites
 
 - Git
-- Python 3.10+
-- Jupyter Notebook
+- Vensim installation
 
-### Installation
-
-```sh
-git clone https://github.com/the-nerd-sloth/co1-semester-project.git
-cd co1-semester-project/Code
-```
 
 [Back to top](#readme-top)
 
 ## Usage
-TODO
+
 - Follow the Installation instructions.
-- Something something...
+- Follow the course's instructions on Vensim.
 
 [Back to top](#readme-top)
 
