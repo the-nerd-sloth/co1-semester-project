@@ -10,7 +10,7 @@ weighted least squares against three datasets at the same time:
 The resulting values are printed and written to calibrated_parameters.json; they were then
 entered into the Vensim model.
 
-Requirements: Python 3, numpy, scipy.   Run:  python calibration.py
+For transperancy: This script was created with help of the AI claude
 """
 import json
 import numpy as np
